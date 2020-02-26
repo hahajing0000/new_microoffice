@@ -1,5 +1,7 @@
 package com.zy.microoffice;
 
+import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +19,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 @EnableSwagger2
+@EnableSwaggerBootstrapUI
 public class Swagger2 {
     private final String KEY="token";
     /**
@@ -34,6 +37,7 @@ public class Swagger2 {
                 //.apis(RequestHandlerSelectors.basePackage("com.zy.microoffice.controller"))
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.regex("^(?!auth).*$"))
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build()
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());

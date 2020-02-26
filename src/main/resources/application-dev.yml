@@ -12,6 +12,9 @@ mybatis:
   mapper-locations: classpath:mapping/*Mapping.xml
   type-aliases-package: com.zy.microoffice.entity
 
+swagger:
+  markdowns: classpath:markdown/*
+
 #showSql
 logging:
   level:

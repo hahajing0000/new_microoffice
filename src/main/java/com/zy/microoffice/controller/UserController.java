@@ -50,6 +50,7 @@ public class UserController {
         UserEntity userEntity= userService.login(phoneNumber,pwd);
         String token=tokenService.getToken(userEntity);
         userEntity.setToken(token);
+
         return userEntity;
     }
 
