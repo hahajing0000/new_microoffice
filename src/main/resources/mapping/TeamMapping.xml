@@ -31,4 +31,7 @@
     <delete id="quitTeam">
         delete from b_rel_team_user where teamcode=#{teamcode} and userid=#{userid};
     </delete>
+    <select id="getUsersFromTeam" resultType="com.zy.microoffice.entity.UserEntity">
+        select * from s_user where id in (select userid from b_rel_team_user where teamcode=#{teamcode});
+    </select>
 </mapper>

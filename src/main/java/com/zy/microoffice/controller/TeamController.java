@@ -3,6 +3,7 @@ package com.zy.microoffice.controller;
 import com.zy.microoffice.entity.ResponseEntity;
 import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.TeamEntity;
+import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.service.TeamService;
 import com.zy.microoffice.token.UserLoginToken;
 import io.swagger.annotations.Api;
@@ -118,5 +119,19 @@ public class TeamController {
                                    @RequestParam @ApiParam(name = "userid",value = "用户id",required = true)
                                            int userid){
         return teamService.quitTeam(teamcode,userid);
+    }
+
+    /**
+     * 获取团队下的所有成员用户
+     * @param teamcode 团队码
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "根据团队码获取所有成员",notes = "根据团队码获取所有成员",httpMethod = "GET")
+    @GetMapping("/getUsersFromTeam")
+    public ResponseEntity<List<UserEntity>> getUsersFromTeam(@RequestParam
+                                                                         @ApiParam(name = "teamcode",value = "团队码",required = true)
+                                                                         String teamcode){
+        return teamService.getUsersFromTeam(teamcode);
     }
 }

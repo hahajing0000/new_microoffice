@@ -1,6 +1,7 @@
 package com.zy.microoffice.mapper;
 
 import com.zy.microoffice.entity.TeamEntity;
+import com.zy.microoffice.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -58,4 +59,11 @@ public interface TeamMapper {
      * @return
      */
     boolean quitTeam(String teamcode,int userid);
+
+    /**
+     * 获取团队下的所有成员用户
+     * @param teamcode 团队码
+     * @return
+     */
+    List<UserEntity> getUsersFromTeam(String teamcode);
 }

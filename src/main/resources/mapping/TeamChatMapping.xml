@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.microoffice.mapper.TeamChatMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.TeamChatEntity">
+
+    </resultMap>
+
+   <insert id="sendMsg">
+       insert into b_team_chat(teamcode,fromuser,msgtype,content,ctime) values(#{teamcode},#{fromuser},#{msgtype},#{content},SYSDATE());
+   </insert>
+
+    <select id="getMsgsFromTeamCode" resultType="com.zy.microoffice.entity.TeamChatEntity">
+        select * from b_team_chat where teamcode=#{teamCode};
+    </select>
+</mapper>

@@ -3,6 +3,7 @@ package com.zy.microoffice.service;
 import com.zy.microoffice.entity.ResponseEntity;
 import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.TeamEntity;
+import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.mapper.TeamMapper;
 import com.zy.microoffice.utils.NumberUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -85,5 +86,14 @@ public class TeamService {
      */
     public ResponseEntity quitTeam(String teamcode,int userid){
         return ResponseUtils.success(teamMapper.quitTeam(teamcode,userid));
+    }
+
+    /**
+     * 获取团队下的所有成员用户
+     * @param teamcode 团队码
+     * @return
+     */
+    public ResponseEntity<List<UserEntity>> getUsersFromTeam(String teamcode){
+        return ResponseUtils.success(teamMapper.getUsersFromTeam(teamcode));
     }
 }
