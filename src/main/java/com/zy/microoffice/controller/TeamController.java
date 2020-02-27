@@ -1,5 +1,7 @@
 package com.zy.microoffice.controller;
 
+import com.zy.microoffice.entity.ResponseEntity;
+import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.TeamEntity;
 import com.zy.microoffice.service.TeamService;
 import com.zy.microoffice.token.UserLoginToken;
@@ -25,10 +27,10 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "创建团队",notes = "创建团队",httpMethod = "POST")
+    @ApiOperation(value = "创建团队(请求参数中id与teamcode不需要传入)",notes = "创建团队(请求参数中id与teamcode不需要传入)",httpMethod = "POST")
 //    @ApiImplicitParam(value = "团队请求实体",dataType = "com.zy.microoffice.entity.TeamEntity",name = "entity",required = true)
     @PostMapping("/createTeam")
-    public boolean createTeam(@RequestBody @ApiParam(name = "entity",value = "传入json格式",required = true) TeamEntity entity){
+    public ResponseEntity createTeam(@RequestBody @ApiParam(name = "entity",value = "传入json格式",required = true) TeamEntity entity){
         return teamService.createTeam(entity);
     }
 
@@ -40,7 +42,7 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "删除团队",notes = "删除团队",httpMethod = "POST")
     @PostMapping("/removeTeam")
-    public boolean removeTeam(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
+    public ResponseEntity removeTeam(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
         return teamService.removeTeam(id);
     }
 
@@ -52,7 +54,7 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "修改团队信息",notes = "修改团队信息",httpMethod = "POST")
     @PostMapping("/modifyTeam")
-    public boolean modifyTeam(@RequestBody @ApiParam(name = "entity",value = "团队请求实体",required = true) TeamEntity entity){
+    public ResponseEntity modifyTeam(@RequestBody @ApiParam(name = "entity",value = "团队请求实体",required = true) TeamEntity entity){
         return teamService.modifyTeam(entity);
     }
 
@@ -64,7 +66,7 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "根据id获取团队信息",notes = "根据id获取团队信息",httpMethod = "GET")
     @GetMapping("/getTeamInfoById")
-    public TeamEntity getTeamInfoById(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
+    public ResponseEntity<TeamEntity> getTeamInfoById(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
         return teamService.getTeamInfoById(id);
     }
 
@@ -76,7 +78,7 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "根据用户id获取其参加或者创建的团队信息",notes = "根据用户id获取其参加或者创建的团队信息",httpMethod = "GET")
     @GetMapping("getTeamInfosByUserId")
-    public List<TeamEntity> getTeamInfosByUserId(@RequestParam @ApiParam(name = "userid",value = "用户id",required = true) int userid){
+    public ResponseEntity<List<TeamEntity>> getTeamInfosByUserId(@RequestParam @ApiParam(name = "userid",value = "用户id",required = true) int userid){
         return teamService.getTeamInfosByUserId(userid);
     }
 }

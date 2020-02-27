@@ -1,5 +1,7 @@
 package com.zy.microoffice.service;
 
+import com.zy.microoffice.entity.ResponseEntity;
+import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +21,9 @@ public class UserService {
      * @param pwd
      * @return
      */
-    public boolean register(String phonenumber,String pwd){
+    public ResponseEntity register(String phonenumber, String pwd){
 
-        return userMapper.register(phonenumber,pwd);
+        return ResponseUtils.success(userMapper.register(phonenumber,pwd));
     }
 
     /**
@@ -40,7 +42,7 @@ public class UserService {
      * @param pwd 密码
      * @return
      */
-    public UserEntity login(String phoneNumber,String pwd){
+    public UserEntity login(String phoneNumber, String pwd){
         return userMapper.login(phoneNumber,pwd);
     }
 
@@ -50,7 +52,7 @@ public class UserService {
      * @param id 用户id
      * @return
      */
-    public boolean modifyRealName(String realName,int id){
-        return userMapper.modifyRealName(realName,id);
+    public ResponseEntity<Boolean> modifyRealName(String realName, int id){
+        return ResponseUtils.success(userMapper.modifyRealName(realName,id));
     }
 }

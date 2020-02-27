@@ -1,12 +1,16 @@
 package com.zy.microoffice.service;
 
+import com.zy.microoffice.entity.ResponseEntity;
+import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.TeamEntity;
 import com.zy.microoffice.mapper.TeamMapper;
+import com.zy.microoffice.utils.NumberUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -20,8 +24,11 @@ public class TeamService {
      * @param entity 团队实体
      * @return
      */
-    public boolean createTeam(TeamEntity entity){
-        return teamMapper.createTeam(entity);
+    public ResponseEntity createTeam(TeamEntity entity){
+        Random random=new Random();
+        int result= NumberUtils.getNumberByRange(10000000,99999999);
+        entity.setTeamcode(String.valueOf(result));
+        return ResponseUtils.success(teamMapper.createTeam(entity));
     }
 
     /**
@@ -29,8 +36,8 @@ public class TeamService {
      * @param id 团队id
      * @return
      */
-    public boolean removeTeam(int id){
-        return teamMapper.removeTeam(id);
+    public ResponseEntity removeTeam(int id){
+        return ResponseUtils.success(teamMapper.removeTeam(id));
     }
 
     /**
@@ -38,8 +45,8 @@ public class TeamService {
      * @param entity 团队实体
      * @return
      */
-    public boolean modifyTeam(TeamEntity entity){
-        return teamMapper.modifyTeam(entity);
+    public ResponseEntity modifyTeam(TeamEntity entity){
+        return ResponseUtils.success(teamMapper.modifyTeam(entity));
     }
 
     /**
@@ -47,8 +54,8 @@ public class TeamService {
      * @param id 团队id
      * @return
      */
-    public TeamEntity getTeamInfoById(int id){
-        return teamMapper.getTeamInfoById(id);
+    public ResponseEntity<TeamEntity> getTeamInfoById(int id){
+        return ResponseUtils.success(teamMapper.getTeamInfoById(id));
     }
 
     /**
@@ -56,7 +63,7 @@ public class TeamService {
      * @param userid 用户id
      * @return
      */
-    public List<TeamEntity> getTeamInfosByUserId(int userid){
-        return teamMapper.getTeamInfosByUserId(userid);
+    public ResponseEntity<List<TeamEntity>> getTeamInfosByUserId(int userid){
+        return ResponseUtils.success(teamMapper.getTeamInfosByUserId(userid));
     }
 }

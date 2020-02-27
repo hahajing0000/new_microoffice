@@ -1,5 +1,7 @@
 package com.zy.microoffice.controller;
 
+import com.zy.microoffice.entity.ResponseEntity;
+import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.service.TokenServiceImpl;
 import com.zy.microoffice.service.UserService;
@@ -21,13 +23,13 @@ public class UserController {
     @Autowired
     TokenServiceImpl tokenService;
 
-    @ApiOperation(value = "添加用户",notes = "添加用户方法",httpMethod = "POST")
+    @ApiOperation(value = "注册用户",notes = "注册用户方法",httpMethod = "POST")
     @ApiImplicitParams(value = {
             @ApiImplicitParam(dataType = "String",name = "phonenumber",value = "电话号码",required = true),
             @ApiImplicitParam(dataType = "String",name = "pwd",value = "密码",required = true)
     })
     @PostMapping("/register")
-    public boolean register(@RequestParam String phonenumber,@RequestParam String pwd){
+    public ResponseEntity register(@RequestParam String phonenumber, @RequestParam String pwd){
 
         return userService.register(phonenumber,pwd);
     }
@@ -36,8 +38,8 @@ public class UserController {
     @ApiOperation(value = "根据id获取用户信息",notes = "根据id获取用户信息",httpMethod = "GET")
     @ApiImplicitParam(value = "主键id",dataType = "String",name = "id",required = true)
     @GetMapping("/getUserById")
-    public UserEntity getUserById(int id){
-        return userService.getUserById(id);
+    public ResponseEntity<UserEntity> getUserById(int id){
+        return ResponseUtils.success(userService.getUserById(id));
     }
 
     @ApiOperation(value = "用户登录方法",notes = "根据用户名密码登录",httpMethod = "POST")
@@ -46,12 +48,12 @@ public class UserController {
             @ApiImplicitParam(dataType = "String",name = "pwd",value = "密码",required = true)
     })
     @PostMapping("/login")
-    public UserEntity login(String phoneNumber,String pwd){
+    public ResponseEntity<UserEntity> login(String phoneNumber,String pwd){
         UserEntity userEntity= userService.login(phoneNumber,pwd);
         String token=tokenService.getToken(userEntity);
         userEntity.setToken(token);
 
-        return userEntity;
+        return ResponseUtils.success(userEntity);
     }
 
     @UserLoginToken
@@ -61,7 +63,7 @@ public class UserController {
             @ApiImplicitParam(dataType = "int",name = "id",value = "用户id",required = true)
     })
     @PostMapping("/modifyRealName")
-    public boolean modifyRealName(String realName,int id){
+    public ResponseEntity<Boolean> modifyRealName(String realName, int id){
         return userService.modifyRealName(realName,id);
     }
 
@@ -69,8 +71,8 @@ public class UserController {
     @ApiOperation(value = "token测试",notes = "验证token是否已经生效",httpMethod = "GET")
     @UserLoginToken
     @GetMapping("/tokenTest")
-    public String tokenTest(){
-        return "恭喜！token已经生效！！！";
+    public ResponseEntity<String> tokenTest(){
+        return ResponseUtils.success("恭喜！token已经生效！！！");
     }
 
 }
