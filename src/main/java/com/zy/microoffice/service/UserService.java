@@ -4,6 +4,7 @@ import com.zy.microoffice.entity.ResponseEntity;
 import com.zy.microoffice.entity.ResponseUtils;
 import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.mapper.UserMapper;
+import com.zy.microoffice.utils.NumberUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,32 @@ public class UserService {
      */
     public ResponseEntity<Boolean> modifyRealName(String realName, int id){
         return ResponseUtils.success(userMapper.modifyRealName(realName,id));
+    }
+
+    /**
+     * 根据电话号码获取用户实体
+     * @param phonenumber 电话号码
+     * @return
+     */
+    public ResponseEntity<UserEntity> getUserByPhoneNumber(String phonenumber){
+        return ResponseUtils.success(userMapper.getUserByPhoneNumber(phonenumber));
+    }
+
+    /**
+     * 获取手机验证码
+     * @return
+     */
+    public ResponseEntity getAuthCode(){
+        return ResponseUtils.success(NumberUtils.getNumberByRange(100000,999999));
+    }
+
+    /**
+     * 更加用户id更新token
+     * @param userid 用户id
+     * @param token token
+     * @return
+     */
+    public boolean modifyToken(int userid,String token){
+        return userMapper.modifyToken(userid,token);
     }
 }

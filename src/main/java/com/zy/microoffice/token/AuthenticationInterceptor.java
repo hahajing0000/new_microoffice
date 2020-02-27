@@ -60,6 +60,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(user.getPwd())).build();
                 try {
                     jwtVerifier.verify(token);
+                    //更新数据表中用户的对应token
+                    //boolean result = userService.modifyToken(Integer.parseInt(userId), token);
                 } catch (JWTVerificationException e) {
                     throw new RuntimeException("401");
                 }

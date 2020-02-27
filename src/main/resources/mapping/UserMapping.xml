@@ -14,7 +14,7 @@
 <!--        -->
 <!--    </select>-->
     <insert id="register">
-        insert into s_user(phonenumber,pwd,realname,ctime) values(#{phonenumber},#{pwd},SYSDATE());
+        insert into s_user(phonenumber,pwd,ctime) values(#{phonenumber},#{pwd},SYSDATE());
     </insert>
     <select id="getUserById" resultType="com.zy.microoffice.entity.UserEntity">
         select * from s_user where id=#{id}
@@ -25,4 +25,8 @@
     <update id="modifyRealName">
         update s_user set realname=#{realName} where id=#{id}
     </update>
+    <select id="getUserByPhoneNumber" resultType="com.zy.microoffice.entity.UserEntity">
+        select * from s_user where phonenumber=#{phonenumber};
+    </select>
+
 </mapper>

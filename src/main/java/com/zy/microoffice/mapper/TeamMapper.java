@@ -2,6 +2,7 @@ package com.zy.microoffice.mapper;
 
 import com.zy.microoffice.entity.TeamEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -16,10 +17,10 @@ public interface TeamMapper {
 
     /**
      * 删除团队
-     * @param id 团队id
+     * @param teamid 团队id
      * @return
      */
-    boolean removeTeam(int id);
+    boolean removeTeam(int teamid);
 
     /**
      * 修改团队
@@ -41,4 +42,20 @@ public interface TeamMapper {
      * @return
      */
     List<TeamEntity> getTeamInfosByUserId(int userid);
+
+    /**
+     * 加入团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    boolean addUserToTeam(String teamcode, int userid);
+
+    /**
+     * 退出团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    boolean quitTeam(String teamcode,int userid);
 }

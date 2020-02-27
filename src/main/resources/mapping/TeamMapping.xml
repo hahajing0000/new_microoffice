@@ -9,8 +9,12 @@
     <insert id="createTeam">
         insert into b_team(teamname,teamcode,creator,creatorname,description,ctime) values(#{teamname},#{teamcode},#{creator},#{creatorname},#{description},SYSDATE());
     </insert>
-    <delete id="removeTeam">
-        delete from b_team where id=#{id}
+    <delete id="removeTeam" parameterType="Integer" statementType="CALLABLE">
+        {
+            call delete_team(
+                #{teamid,mode=IN}
+            )
+        }
     </delete>
     <update id="modifyTeam">
         update b_team set teamname=#{teamname},teamcode=#{teamcode},creator=#{creator},creatorname=#{creatorname},description=#{description} where id=#{id};
@@ -19,6 +23,12 @@
         select * from b_team where id=#{id}
     </select>
     <select id="getTeamInfosByUserId" resultType="com.zy.microoffice.entity.TeamEntity">
-        select * from b_team where creator=#{userid} UNION select * from b_team where id in (select teamid from b_rel_team_user where userid=#{userid})
+        select * from b_team where creator=#{userid} UNION select * from b_team where teamcode in (select teamcode from b_rel_team_user where userid=#{userid})
     </select>
+    <insert id="addUserToTeam">
+        insert into b_rel_team_user(teamcode,userid,ctime) values(#{teamcode},#{userid},SYSDATE());
+    </insert>
+    <delete id="quitTeam">
+        delete from b_rel_team_user where teamcode=#{teamcode} and userid=#{userid};
+    </delete>
 </mapper>

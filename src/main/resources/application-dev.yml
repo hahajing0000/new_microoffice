@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: Zh@ngyue198662
-    url: jdbc:mysql://rm-8vb0fgh87w9z5q61yko.mysql.zhangbei.rds.aliyuncs.com:3306/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    url: jdbc:mysql://rm-8vb0fgh87w9z5q61yko.mysql.zhangbei.rds.aliyuncs.com:3306/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&allowMultiQueries=true
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:

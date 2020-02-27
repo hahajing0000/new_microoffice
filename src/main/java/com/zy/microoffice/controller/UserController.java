@@ -75,5 +75,25 @@ public class UserController {
         return ResponseUtils.success("恭喜！token已经生效！！！");
     }
 
+    @UserLoginToken
+    @ApiOperation(value = "获取手机验证码",notes = "获取手机验证码",httpMethod = "GET")
+    @GetMapping("/getAuthCode")
+    public ResponseEntity getAuthCode(){
+        return userService.getAuthCode();
+    }
+
+    /**
+     * 根据电话号码获取用户实体
+     * @param phonenumber 电话号码
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "根据电话号码获取用户实体",notes = "根据电话号码获取用户实体",httpMethod = "GET")
+    @GetMapping("/getUserByPhoneNumber")
+    public ResponseEntity<UserEntity> getUserByPhoneNumber(@RequestParam
+                                                                       @ApiParam(name = "phonenumber" ,value = "电话号码",required = true)
+                                                                       String phonenumber){
+        return userService.getUserByPhoneNumber(phonenumber);
+    }
 }
 

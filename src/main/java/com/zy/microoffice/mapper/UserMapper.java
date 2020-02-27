@@ -15,4 +15,8 @@ public interface UserMapper {
     UserEntity login(String phoneNumber,String pwd);
     //修改用户真实姓名
     boolean modifyRealName(String realName,int id);
+    //根据电话号码获取用户信息
+    UserEntity getUserByPhoneNumber(String phonenumber);
+    //更新token
+    boolean modifyToken(int userid,String token);
 }

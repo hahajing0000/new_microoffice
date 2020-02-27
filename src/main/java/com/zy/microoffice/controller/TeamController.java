@@ -40,7 +40,7 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "删除团队",notes = "删除团队",httpMethod = "POST")
+    @ApiOperation(value = "删除团队（同时删除团队下所有成员）",notes = "删除团队（同时删除团队下所有成员）",httpMethod = "POST")
     @PostMapping("/removeTeam")
     public ResponseEntity removeTeam(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
         return teamService.removeTeam(id);
@@ -66,7 +66,9 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "根据id获取团队信息",notes = "根据id获取团队信息",httpMethod = "GET")
     @GetMapping("/getTeamInfoById")
-    public ResponseEntity<TeamEntity> getTeamInfoById(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
+    public ResponseEntity<TeamEntity> getTeamInfoById(@RequestParam
+                                                          @ApiParam(name = "id",value = "团队id",required = true)
+                                                                  int id){
         return teamService.getTeamInfoById(id);
     }
 
@@ -78,7 +80,43 @@ public class TeamController {
     @UserLoginToken
     @ApiOperation(value = "根据用户id获取其参加或者创建的团队信息",notes = "根据用户id获取其参加或者创建的团队信息",httpMethod = "GET")
     @GetMapping("getTeamInfosByUserId")
-    public ResponseEntity<List<TeamEntity>> getTeamInfosByUserId(@RequestParam @ApiParam(name = "userid",value = "用户id",required = true) int userid){
+    public ResponseEntity<List<TeamEntity>> getTeamInfosByUserId(@RequestParam
+                                                                     @ApiParam(name = "userid",value = "用户id",required = true)
+                                                                             int userid){
         return teamService.getTeamInfosByUserId(userid);
+    }
+
+    /**
+     * 添加用户到团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "加入团队",notes = "加入团队",httpMethod = "POST")
+    @PostMapping("/addUserToTeam")
+    public ResponseEntity addUserToTeam(@RequestParam
+                                            @ApiParam(name = "teamcode",value = "团队码",required = true)
+                                                    String teamcode,
+                                        @RequestParam
+                                        @ApiParam(name = "userid",value = "用户id",required = true)
+                                                int userid){
+        return teamService.addUserToTeam(teamcode,userid);
+    }
+
+    /**
+     * 退出团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "退出团队",notes = "退出团队",httpMethod = "POST")
+    @PostMapping("/quitTeam")
+    public ResponseEntity quitTeam(@RequestParam @ApiParam(name = "teamcode",value = "团队码",required = true)
+                                               String teamcode,
+                                   @RequestParam @ApiParam(name = "userid",value = "用户id",required = true)
+                                           int userid){
+        return teamService.quitTeam(teamcode,userid);
     }
 }

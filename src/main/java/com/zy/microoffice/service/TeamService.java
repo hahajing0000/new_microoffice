@@ -66,4 +66,24 @@ public class TeamService {
     public ResponseEntity<List<TeamEntity>> getTeamInfosByUserId(int userid){
         return ResponseUtils.success(teamMapper.getTeamInfosByUserId(userid));
     }
+
+    /**
+     * 加入团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    public ResponseEntity addUserToTeam(String teamcode, int userid){
+        return ResponseUtils.success(teamMapper.addUserToTeam(teamcode,userid));
+    }
+
+    /**
+     * 退出团队
+     * @param teamcode 团队码
+     * @param userid 用户id
+     * @return
+     */
+    public ResponseEntity quitTeam(String teamcode,int userid){
+        return ResponseUtils.success(teamMapper.quitTeam(teamcode,userid));
+    }
 }
