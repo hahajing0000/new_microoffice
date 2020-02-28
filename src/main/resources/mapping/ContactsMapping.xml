@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.microoffice.mapper.ContactsMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.ContactsEntity">
+
+    </resultMap>
+
+    <insert id="addContacts">
+        insert into b_contacts(userid,contactsid,ctime) values(#{userid},#{contactsid},SYSDATE());
+    </insert>
+
+    <select id="getContacts" resultType="com.zy.microoffice.entity.ContactsEntity">
+        select * from b_contacts where userid=#{userid};
+    </select>
+</mapper>

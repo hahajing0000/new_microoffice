@@ -3,6 +3,8 @@ package com.zy.microoffice.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.beans.Transient;
+
 @ApiModel(value = "用户信息" ,description = "用户信息")
 public class UserEntity {
 

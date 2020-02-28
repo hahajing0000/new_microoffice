@@ -71,7 +71,7 @@ public class Swagger2 {
                 //条款地址
                 .termsOfServiceUrl("http://despairyoke.github.io/")
                 .contact(new Contact("Zhangyue","http://www.zydeveloper.com/","444511958@qq.com"))
-                .version("1.0")
+                .version("1.1")
                 //描述
                 .description("微办公 APP 项目API")
                 .build();
