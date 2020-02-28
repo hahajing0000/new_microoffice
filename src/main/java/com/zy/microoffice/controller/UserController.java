@@ -39,7 +39,9 @@ public class UserController {
     @ApiImplicitParam(value = "主键id",dataType = "String",name = "id",required = true)
     @GetMapping("/getUserById")
     public ResponseEntity<UserEntity> getUserById(int id){
-        return ResponseUtils.success(userService.getUserById(id));
+        UserEntity user = userService.getUserById(id);
+        user.setPwd("");
+        return ResponseUtils.success(user);
     }
 
     @ApiOperation(value = "用户登录方法",notes = "根据用户名密码登录",httpMethod = "POST")
@@ -94,6 +96,19 @@ public class UserController {
                                                                        @ApiParam(name = "phonenumber" ,value = "电话号码",required = true)
                                                                        String phonenumber){
         return userService.getUserByPhoneNumber(phonenumber);
+    }
+
+    /**
+     * 修改用户头像
+     * @param userid 用户id
+     * @param headimg 用户头像
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "修改用户头像",notes = "修改用户头像",httpMethod = "POST")
+    @PostMapping("/modifyHeadImg")
+    public ResponseEntity modifyHeadImg(int userid, String headimg){
+        return userService.modifyHeadImg(userid,headimg);
     }
 }
 

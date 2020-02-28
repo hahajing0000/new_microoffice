@@ -10,7 +10,7 @@
         insert into b_contacts(userid,contactsid,ctime) values(#{userid},#{contactsid},SYSDATE());
     </insert>
 
-    <select id="getContacts" resultType="com.zy.microoffice.entity.ContactsEntity">
-        select * from b_contacts where userid=#{userid};
+    <select id="getContacts" resultType="com.zy.microoffice.entity.UserEntity">
+        select u.id,u.phonenumber,u.realname,u.headimg,u.ctime from b_contacts c,s_user u where c.userid=u.id and c.userid=#{userid};
     </select>
 </mapper>

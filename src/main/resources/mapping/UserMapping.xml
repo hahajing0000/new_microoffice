@@ -5,8 +5,9 @@
     <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.UserEntity">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
-        <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+<!--        <result column="pwd" jdbcType="VARCHAR" property="pwd" />-->
         <result column="realname" jdbcType="VARCHAR" property="realname" />
+        <result column="token" jdbcType="VARCHAR" property="token"/>
     </resultMap>
 
 <!--    <select id="AddUser" resultType="boolean">-->
@@ -16,17 +17,20 @@
     <insert id="register">
         insert into s_user(phonenumber,pwd,ctime) values(#{phonenumber},#{pwd},SYSDATE());
     </insert>
-    <select id="getUserById" resultType="com.zy.microoffice.entity.UserEntity">
+    <select id="getUserById" resultMap="BaseResultMap">
         select * from s_user where id=#{id}
     </select>
-    <select id="login" resultType="com.zy.microoffice.entity.UserEntity">
-        select * from s_user where phonenumber=#{phoneNumber} and pwd=#{pwd}
+    <select id="login" resultMap="BaseResultMap">
+        select id,phonenumber,realname,headimg,ctime from s_user where phonenumber=#{phoneNumber} and pwd=#{pwd}
     </select>
     <update id="modifyRealName">
         update s_user set realname=#{realName} where id=#{id}
     </update>
-    <select id="getUserByPhoneNumber" resultType="com.zy.microoffice.entity.UserEntity">
-        select * from s_user where phonenumber=#{phonenumber};
+    <select id="getUserByPhoneNumber" resultMap="BaseResultMap">
+        select id,phonenumber,realname,headimg,ctime from s_user where phonenumber=#{phonenumber};
     </select>
+    <update id="modifyHeadImg">
+        update s_user set headimg=#{headimg} where id=#{userid};
+    </update>
 
 </mapper>

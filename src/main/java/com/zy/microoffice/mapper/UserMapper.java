@@ -19,4 +19,6 @@ public interface UserMapper {
     UserEntity getUserByPhoneNumber(String phonenumber);
     //更新token
     boolean modifyToken(int userid,String token);
+    //修改用户头像
+    boolean modifyHeadImg(int userid,String headimg);
 }

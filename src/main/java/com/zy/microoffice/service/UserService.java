@@ -8,6 +8,7 @@ import com.zy.microoffice.utils.NumberUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @Service
@@ -82,5 +83,15 @@ public class UserService {
      */
     public boolean modifyToken(int userid,String token){
         return userMapper.modifyToken(userid,token);
+    }
+
+    /**
+     * 修改用户头像
+     * @param userid 用户id
+     * @param headimg 用户头像
+     * @return
+     */
+    public ResponseEntity modifyHeadImg(int userid, String headimg){
+        return ResponseUtils.success(userMapper.modifyHeadImg(userid,headimg));
     }
 }
