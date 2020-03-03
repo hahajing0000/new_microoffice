@@ -59,12 +59,12 @@ public class UserController {
     }
 
     @UserLoginToken
-    @ApiOperation(value = "更改用户真实姓名",notes = "更改用户真实姓名",httpMethod = "POST")
+    @ApiOperation(value = "更改用户真实姓名",notes = "更改用户真实姓名",httpMethod = "PUT")
     @ApiImplicitParams(value = {
             @ApiImplicitParam(dataType = "String",name = "realName",value = "真实姓名",required = true),
             @ApiImplicitParam(dataType = "int",name = "id",value = "用户id",required = true)
     })
-    @PostMapping("/modifyRealName")
+    @PutMapping("/modifyRealName")
     public ResponseEntity<Boolean> modifyRealName(String realName, int id){
         return userService.modifyRealName(realName,id);
     }
@@ -105,8 +105,8 @@ public class UserController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "修改用户头像",notes = "修改用户头像",httpMethod = "POST")
-    @PostMapping("/modifyHeadImg")
+    @ApiOperation(value = "修改用户头像",notes = "修改用户头像",httpMethod = "PUT")
+    @PutMapping("/modifyHeadImg")
     public ResponseEntity modifyHeadImg(int userid, String headimg){
         return userService.modifyHeadImg(userid,headimg);
     }

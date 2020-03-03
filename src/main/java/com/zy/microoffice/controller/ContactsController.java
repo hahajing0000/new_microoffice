@@ -73,8 +73,8 @@ public class ContactsController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "同意申请",notes = "同意申请",httpMethod = "POST")
-    @PostMapping("/agreeApply")
+    @ApiOperation(value = "同意申请",notes = "同意申请",httpMethod = "PUT")
+    @PutMapping("/agreeApply")
     public ResponseEntity<Boolean> agreeApply(int userid, int contactsid){
         return contactsService.agreeApply(userid,contactsid);
     }

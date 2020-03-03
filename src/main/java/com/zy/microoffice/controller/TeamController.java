@@ -41,8 +41,8 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "删除团队（同时删除团队下所有成员）",notes = "删除团队（同时删除团队下所有成员）",httpMethod = "POST")
-    @PostMapping("/removeTeam")
+    @ApiOperation(value = "删除团队（同时删除团队下所有成员）",notes = "删除团队（同时删除团队下所有成员）",httpMethod = "DELETE")
+    @DeleteMapping("/removeTeam")
     public ResponseEntity removeTeam(@RequestParam @ApiParam(name = "id",value = "团队id",required = true) int id){
         return teamService.removeTeam(id);
     }
@@ -53,8 +53,8 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "修改团队信息",notes = "修改团队信息",httpMethod = "POST")
-    @PostMapping("/modifyTeam")
+    @ApiOperation(value = "修改团队信息",notes = "修改团队信息",httpMethod = "PUT")
+    @PutMapping("/modifyTeam")
     public ResponseEntity modifyTeam(@RequestBody @ApiParam(name = "entity",value = "团队请求实体",required = true) TeamEntity entity){
         return teamService.modifyTeam(entity);
     }
@@ -112,8 +112,8 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "退出团队",notes = "退出团队",httpMethod = "POST")
-    @PostMapping("/quitTeam")
+    @ApiOperation(value = "退出团队",notes = "退出团队",httpMethod = "DELETE")
+    @DeleteMapping("/quitTeam")
     public ResponseEntity quitTeam(@RequestParam @ApiParam(name = "teamcode",value = "团队码",required = true)
                                                String teamcode,
                                    @RequestParam @ApiParam(name = "userid",value = "用户id",required = true)
@@ -168,8 +168,8 @@ public class TeamController {
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "同意加入团队",notes = "同意加入团队",httpMethod = "GET")
-    @GetMapping("/agreeApply")
+    @ApiOperation(value = "同意加入团队",notes = "同意加入团队",httpMethod = "PUT")
+    @PutMapping("/agreeApply")
     public ResponseEntity<Boolean> agreeApply(@RequestParam
                                                           @ApiParam(name = "userid",value = "用户id",required = true)
                                                           int userid,
