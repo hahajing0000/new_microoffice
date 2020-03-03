@@ -134,4 +134,48 @@ public class TeamController {
                                                                          String teamcode){
         return teamService.getUsersFromTeam(teamcode);
     }
+
+//    /**
+//     * 获取团队二维码
+//     * @param teamCode 团队码
+//     * @return
+//     */
+//    @UserLoginToken
+//    @ApiOperation(value = "获取团队二维码连接",notes = "获取团队二维码连接",httpMethod = "GET")
+//    @GetMapping("/getQRcode")
+//    public ResponseEntity getQRcode(String teamCode){
+//        return teamService.getQRcode(teamCode);
+//    }
+
+    /**
+     * 获取加入团队申请
+     * @param teamcode 团队Code
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "获取加入团队申请",notes = "获取加入团队申请",httpMethod = "GET")
+    @GetMapping("/getAddApply")
+    public ResponseEntity<List<UserEntity>> getAddApply(@RequestParam
+                                                                    @ApiParam(name = "teamcode",value = "团队Code",required = true)
+                                                                    String teamcode){
+        return teamService.getAddApply(teamcode);
+    }
+
+    /**
+     * 同意加入团队
+     * @param userid 用户id
+     * @param teamcode 团队Code
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "同意加入团队",notes = "同意加入团队",httpMethod = "GET")
+    @GetMapping("/agreeApply")
+    public ResponseEntity<Boolean> agreeApply(@RequestParam
+                                                          @ApiParam(name = "userid",value = "用户id",required = true)
+                                                          int userid,
+                                              @RequestParam
+                                                      @ApiParam(name = "teamcode",value = "团队Code",required = true)
+                                              String teamcode){
+        return teamService.agreeApply(userid,teamcode);
+    }
 }

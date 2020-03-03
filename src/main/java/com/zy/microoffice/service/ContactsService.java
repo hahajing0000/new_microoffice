@@ -36,4 +36,22 @@ public class ContactsService {
     public ResponseEntity<List<UserEntity>> getContacts(int userid){
         return ResponseUtils.success(contactsMapper.getContacts(userid));
     }
+
+    /**
+     * 获取添加好友的申请
+     * @param userid
+     * @return
+     */
+    public ResponseEntity<List<UserEntity>> getAddApply(int userid){
+        return ResponseUtils.success(contactsMapper.getAddApply(userid));
+    }
+
+    /**
+     * 同意申请
+     * @param userid
+     * @return
+     */
+    public ResponseEntity<Boolean> agreeApply(int userid, int contactsid){
+        return ResponseUtils.success(contactsMapper.agreeApply(userid,contactsid));
+    }
 }

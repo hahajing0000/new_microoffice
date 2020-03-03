@@ -23,15 +23,21 @@
         select * from b_team where id=#{id}
     </select>
     <select id="getTeamInfosByUserId" resultType="com.zy.microoffice.entity.TeamEntity">
-        select * from b_team where creator=#{userid} UNION select * from b_team where teamcode in (select teamcode from b_rel_team_user where userid=#{userid})
+        select * from b_team where creator=#{userid} UNION select * from b_team where teamcode in (select teamcode from b_rel_team_user where userid=#{userid} and agree=1)
     </select>
     <insert id="addUserToTeam">
-        insert into b_rel_team_user(teamcode,userid,ctime) values(#{teamcode},#{userid},SYSDATE());
+        insert into b_rel_team_user(teamcode,userid,ctime,agree) values(#{teamcode},#{userid},SYSDATE(),0);
     </insert>
     <delete id="quitTeam">
         delete from b_rel_team_user where teamcode=#{teamcode} and userid=#{userid};
     </delete>
     <select id="getUsersFromTeam" resultType="com.zy.microoffice.entity.UserEntity">
-        select * from s_user where id in (select userid from b_rel_team_user where teamcode=#{teamcode});
+        select * from s_user where id in (select userid from b_rel_team_user where teamcode=#{teamcode} and agree=0);
     </select>
+    <select id="getAddApply" resultType="com.zy.microoffice.entity.UserEntity">
+        select * from s_user where id in (select userid from b_rel_team_user where teamcode=#{teamcode} and agree=0)
+    </select>
+    <update id="agreeApply">
+        update b_rel_team_user set agree=1 where teamcode=#{teamcode} and userid=#{userid}
+    </update>
 </mapper>

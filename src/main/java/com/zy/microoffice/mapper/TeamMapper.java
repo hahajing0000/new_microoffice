@@ -66,4 +66,19 @@ public interface TeamMapper {
      * @return
      */
     List<UserEntity> getUsersFromTeam(String teamcode);
+
+    /**
+     * 获取加入团队申请
+     * @param teamcode 团队Code
+     * @return
+     */
+    List<UserEntity> getAddApply(String teamcode);
+
+    /**
+     * 同意加入团队
+     * @param userid 用户id
+     * @param teamcode 团队Code
+     * @return
+     */
+    boolean agreeApply(int userid,String teamcode);
 }

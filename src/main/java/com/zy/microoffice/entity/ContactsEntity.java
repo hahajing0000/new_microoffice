@@ -14,4 +14,6 @@ public class ContactsEntity {
     private int userid;
     @ApiModelProperty(name = "contactsid",value = "联系人id",notes = "联系人id",dataType = "int")
     private int contactsid;
+    @ApiModelProperty(name = "agree",value = "是否同意",notes = "是否同意",dataType = "int")
+    private int agree;
 }

@@ -7,10 +7,16 @@
     </resultMap>
 
     <insert id="addContacts">
-        insert into b_contacts(userid,contactsid,ctime) values(#{userid},#{contactsid},SYSDATE());
+        insert into b_contacts(userid,contactsid,ctime,agree) values(#{userid},#{contactsid},SYSDATE(),0);
     </insert>
 
     <select id="getContacts" resultType="com.zy.microoffice.entity.UserEntity">
-        select u.id,u.phonenumber,u.realname,u.headimg,u.ctime from b_contacts c,s_user u where c.userid=u.id and c.userid=#{userid};
+        select u.id,u.phonenumber,u.realname,u.headimg,u.ctime from b_contacts c,s_user u where c.userid=u.id and c.userid=#{userid} and c.agree=1;
     </select>
+    <select id="getAddApply" resultType="com.zy.microoffice.entity.UserEntity">
+        select * from s_user where id in (select contactsid from b_contacts where agree=0 and userid=#{userid})
+    </select>
+    <update id="agreeApply">
+        update b_contacts set agree=1 where userid=#{userid} and contactsid=#{contactsid}
+    </update>
 </mapper>

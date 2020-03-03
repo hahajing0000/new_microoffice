@@ -52,4 +52,30 @@ public class ContactsController {
                                                                     int userid){
         return contactsService.getContacts(userid);
     }
+
+    /**
+     * 获取添加好友的申请
+     * @param userid
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "获取添加好友的申请",notes = "获取添加好友的申请",httpMethod = "GET")
+    @GetMapping("/getAddApply")
+    public ResponseEntity<List<UserEntity>> getAddApply(@RequestParam
+                                                                    @ApiParam(name = "userid",value = "用户id",required = true)
+                                                                    int userid){
+        return contactsService.getAddApply(userid);
+    }
+
+    /**
+     * 同意申请
+     * @param userid
+     * @return
+     */
+    @UserLoginToken
+    @ApiOperation(value = "同意申请",notes = "同意申请",httpMethod = "POST")
+    @PostMapping("/agreeApply")
+    public ResponseEntity<Boolean> agreeApply(int userid, int contactsid){
+        return contactsService.agreeApply(userid,contactsid);
+    }
 }

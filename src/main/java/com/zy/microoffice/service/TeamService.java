@@ -96,4 +96,32 @@ public class TeamService {
     public ResponseEntity<List<UserEntity>> getUsersFromTeam(String teamcode){
         return ResponseUtils.success(teamMapper.getUsersFromTeam(teamcode));
     }
+
+//    /**
+//     * 获取团队二维码链接
+//     * @param teamCode 团队码
+//     * @return
+//     */
+//    public ResponseEntity getQRcode(String teamCode) {
+//        return ResponseUtils.success(teamCode);
+//    }
+
+    /**
+     * 获取加入团队申请
+     * @param teamcode 团队Code
+     * @return
+     */
+    public ResponseEntity<List<UserEntity>> getAddApply(String teamcode){
+        return ResponseUtils.success(teamMapper.getAddApply(teamcode));
+    }
+
+    /**
+     * 同意加入团队
+     * @param userid 用户id
+     * @param teamcode 团队Code
+     * @return
+     */
+    public ResponseEntity<Boolean> agreeApply(int userid, String teamcode){
+        return ResponseUtils.success(teamMapper.agreeApply(userid,teamcode));
+    }
 }

@@ -21,7 +21,7 @@
         select * from s_user where id=#{id}
     </select>
     <select id="login" resultMap="BaseResultMap">
-        select id,phonenumber,realname,headimg,ctime from s_user where phonenumber=#{phoneNumber} and pwd=#{pwd}
+        select id,phonenumber,pwd,realname,headimg,ctime from s_user where phonenumber=#{phoneNumber} and pwd=#{pwd}
     </select>
     <update id="modifyRealName">
         update s_user set realname=#{realName} where id=#{id}

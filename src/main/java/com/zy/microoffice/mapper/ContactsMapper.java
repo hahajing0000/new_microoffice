@@ -21,4 +21,18 @@ public interface ContactsMapper {
      * @return
      */
     List<UserEntity> getContacts(int userid);
+
+    /**
+     * 获取添加好友的申请
+     * @param userid
+     * @return
+     */
+    List<UserEntity> getAddApply(int userid);
+
+    /**
+     * 同意申请
+     * @param userid
+     * @return
+     */
+    boolean agreeApply(int userid,int contactsid);
 }
