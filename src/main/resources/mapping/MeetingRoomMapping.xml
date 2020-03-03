@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.microoffice.mapper.MeetingRoomMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.MeetingRoomEntity">
+
+    </resultMap>
+
+    <insert id="addMeetingRoom">
+        insert into b_meetingroom(meetingroomname,teamcode,creator,ctime) values(#{meetingroomname},#{teamcode},#{creator},SYSDATE());
+    </insert>
+    <delete id="removeMeetingRoom">
+        delete from b_meetingroom where id=#{id} and creator=#{creator};
+    </delete>
+</mapper>

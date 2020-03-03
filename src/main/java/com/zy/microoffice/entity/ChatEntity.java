@@ -3,7 +3,9 @@ package com.zy.microoffice.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @ApiModel(value = "ChatEntity",description = "个人聊天实体")
 public class ChatEntity extends MsgEntity {
