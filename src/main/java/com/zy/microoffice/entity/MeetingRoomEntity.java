@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-@ApiModel(value = "MeetingRoomEntity",description = "会议室实体")
+@ApiModel(value = "会议室实体",description = "会议室实体")
 public class MeetingRoomEntity {
     @ApiModelProperty(name = "id",value = "表主键",notes = "表主键",dataType = "int")
     private int id;

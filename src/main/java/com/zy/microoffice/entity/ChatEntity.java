@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-@ApiModel(value = "ChatEntity",description = "个人聊天实体")
+@ApiModel(value = "聊天实体",description = "个人聊天实体")
 public class ChatEntity extends MsgEntity {
     @ApiModelProperty(name = "fromuser",value = "发送人",notes = "发送人",dataType = "int")
     private int fromuser;
