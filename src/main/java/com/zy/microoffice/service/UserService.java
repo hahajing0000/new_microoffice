@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Service
 public class UserService {
@@ -19,13 +22,27 @@ public class UserService {
 
     /**
      * 添加用户信息
-     * @param phonenumber
-     * @param pwd
+     * @param pn
+     * @param p
      * @return
      */
-    public ResponseEntity register(String phonenumber, String pwd){
+    public ResponseEntity register(String pn, String p){
+        boolean r = false;
+        Map<String,String> param=new HashMap<String,String>();
+        param.put("pn",pn);
+        param.put("p",p);
+        param.put("result","");
+        userMapper.register(param);
+        String result = param.get("result");
 
-        return ResponseUtils.success(userMapper.register(phonenumber,pwd));
+        if (result.equals("1")){
+            r=true;
+        }
+        else{
+            r=false;
+            return ResponseUtils.failed("用户可能已经存在");
+        }
+        return ResponseUtils.success(r);
     }
 
     /**

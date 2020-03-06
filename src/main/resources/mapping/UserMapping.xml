@@ -14,8 +14,14 @@
 <!--        select * from s_user where id = #{id}-->
 <!--        -->
 <!--    </select>-->
-    <insert id="register">
-        insert into s_user(phonenumber,pwd,ctime) values(#{phonenumber},#{pwd},SYSDATE());
+    <insert id="register" statementType="CALLABLE">
+        {
+            call user_register(
+                #{pn,mode=IN,jdbcType=VARCHAR},
+                #{p,mode=IN,jdbcType=VARCHAR},
+                #{result,mode=OUT,jdbcType=VARCHAR}
+                )
+        }
     </insert>
     <select id="getUserById" resultMap="BaseResultMap">
         select * from s_user where id=#{id}

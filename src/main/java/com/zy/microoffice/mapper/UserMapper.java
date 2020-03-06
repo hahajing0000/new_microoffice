@@ -4,11 +4,12 @@ import com.zy.microoffice.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface UserMapper {
     //添加用户
-    boolean register(String phonenumber,String pwd);
+    void register(Map<String,String> param);
     //获取用户信息
     UserEntity getUserById(int id);
     //用户登录

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.microoffice.mapper.AppMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.AppEntity">
+
+    </resultMap>
+
+    <select id="getApps" resultType="com.zy.microoffice.entity.AppEntity">
+        select a.* from b_app a,b_apptype appt where a.apptypeid=appt.id
+        <if test="appTypeid!=-1">
+            and appt.id=#{appTypeid};
+        </if>
+
+    </select>
+    <select id="getAppsByUser" resultType="com.zy.microoffice.entity.AppEntity">
+        select a.* from s_user s,b_user_app ua,b_app a where s.id=ua.userid and ua.appid=a.id
+        <if test="appTypeid!=-1">
+            and ua.appid=#{appTypeid};
+        </if>
+    </select>
+    <insert id="subscribeApp">
+        insert into b_user_app(appid,userid,ctime) values(#{appid},#{userid},SYSDATE());
+    </insert>
+    <delete id="unSubscribeApp">
+        delete from b_user_app where appid=#{appid} and userid=#{userid};
+    </delete>
+    <select id="getAppDetail" resultType="com.zy.microoffice.entity.AppEntity">
+        select * from b_app where id=#{appid};
+    </select>
+
+</mapper>

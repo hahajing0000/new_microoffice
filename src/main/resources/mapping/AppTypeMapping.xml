@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.microoffice.mapper.AppTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.AppTypeEntity">
+
+    </resultMap>
+
+    <select id="getAppTypes" resultType="com.zy.microoffice.entity.AppTypeEntity">
+        select * from b_apptype;
+    </select>
+
+</mapper>
