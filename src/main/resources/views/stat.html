@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: common_header(~{::title},~{::link})">
+    <!-- Title Page-->
+    <title>微办公系统</title>
+    <link th:href="@{/datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="all">
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+
+    <div th:replace="~{menu :: systemmenu}"></div>
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <div th:replace="~{titlebar :: titlebar}"></div>
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <!-- DATA TABLE -->
+<!--            <h3 class="title-5 m-b-35">1705A面试情况</h3>-->
+
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+                    <div class="row" style="margin-left:30rm;">
+                            <div style="margin-left: 3rem;"></div>
+                            开始时间:
+                            <div class="input-append date" id="datetimepickerstart">
+                                <input size="16" type="text" readonly>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+
+
+
+                           结束时间:
+                           <div class="input-append date" id="datetimepickerend">
+                               <input size="16" type="text" readonly>
+                               <span class="add-on"><i class="icon-th"></i></span>
+                           </div>
+
+
+                    </div>
+
+                </div>
+                <div class="table-data__tool-right">
+                    <button class="btn btn-danger">开始检索</button>
+                    <a href="/stat/toAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>[[#{stat.add}]]</a>
+
+                </div>
+            </div>
+            <div class="table-responsive table-responsive-data2">
+                <table class="table table-borderless table-striped table-earning">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>面试公司</th>
+                        <th>职位</th>
+                        <th>面试时间</th>
+                        <th>面试结果</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="stat : ${list}" class="tr-shadow">
+                        <td th:text="${stat.realname}">Lori Lynch</td>
+                        <td>
+                            <span class="block-email" th:text="${stat.companyname}">lori@example.com</span>
+                        </td>
+                        <td class="desc" th:text="${stat.post}">Samsung S8 Black</td>
+                        <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
+                        <td th:switch="${stat.interviewresult}">
+                            <span th:case="0" class="status--process">未开始</span>
+                            <span th:case="1" class="status--process">通过</span>
+                            <span th:case="-1" class="status--denied">未通过</span>
+                        </td>
+                        <td>
+                            <div class="table-data-feature">
+
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- END DATA TABLE -->
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+    </div>
+
+</div>
+
+
+<th:block th:replace="javascript::scripts(~{::script})">
+    <script th:src="@{/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script type="text/javascript">
+         $(function () {
+            $('#datetimepickerstart').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                'setDate': new Date(),
+                language:"zh-CN",
+                weekStart: 1,
+                todayBtn: false,
+                autoclose: true,
+                todayHighlight: 1,
+                pickerPosition: 'bottom-right',
+            });
+            $('#datetimepickerend').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                'setDate': new Date(),
+                language:"zh-CN",
+                weekStart: 1,
+                todayBtn: false,
+                autoclose: true,
+                todayHighlight: 1,
+                pickerPosition: 'bottom-right',
+            });
+        });
+    </script>
+</th:block>
+
+</body>
+
+</html>
+<!-- end document-->

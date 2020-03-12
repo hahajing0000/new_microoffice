@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block" th:fragment="systemmenu">
+    <div class="logo">
+        <a href="#">
+            <img th:src="@{/images/icon/logo.png}" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li class="active has-sub">
+                    <a class="js-arrow" href="index.html">
+                        <i class="fas fa-tachometer-alt"></i>[[#{index.menu_home}]]</a>
+                </li>
+                <li>
+                    <form action="/stat" method="get">
+                        <button type="submit">
+                            <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</button>
+                    </form>
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: common_header(~{::title},~{::link})">
+    <!-- Title Page-->
+    <title>微办公系统</title>
+    <link th:href="@{/datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="all">
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+
+    <div th:replace="~{menu :: systemmenu}"></div>
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <div th:replace="~{titlebar :: titlebar}"></div>
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="card">
+                <div class="card-header">面试信息录入</div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/stat/insert}" method="post" novalidate="novalidate">
+                        <input type="hidden" name="userid" />
+                        <div class="form-group">
+                            <label for="companyname" class="control-label mb-1">公司名称</label>
+                            <input name="companyname" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="post" class="control-label mb-1">职位名称</label>
+                            <input  name="post" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="requestinfo" class="control-label mb-1">职位需求</label>
+                            <textarea name="requestinfo"  rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="interviewtime" class="control-label mb-1">面试时间</label>
+                            <div class="input-append date" id="datetimepickerstart">
+                                <input name="interviewtime" size="16" class="form-control" type="text" readonly>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                <i class="fa fa-save fa-lg"></i>&nbsp;
+                                <span id="payment-button-amount">保存</span>
+                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+    </div>
+
+</div>
+
+
+<th:block th:replace="javascript::scripts(~{::script})">
+    <script th:src="@{/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script type="text/javascript">
+         $(function () {
+            $('#datetimepickerstart').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                'setDate': new Date(),
+                language:"zh-CN",
+                weekStart: 1,
+                todayBtn: false,
+                autoclose: true,
+                todayHighlight: 1,
+                pickerPosition: 'top-right',
+            });
+
+        });
+    </script>
+</th:block>
+
+</body>
+
+</html>
+<!-- end document-->

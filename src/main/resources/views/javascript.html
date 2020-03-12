@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="scripts(scripts)">
+    <!-- Jquery JS-->
+    <script th:src="@{/vendor/jquery-3.2.1.min.js}"></script>
+    <!-- Bootstrap JS-->
+    <script th:src="@{/vendor/bootstrap-4.1/popper.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
+
+
+    <th:block th:replace="${scripts}"></th:block>
+</th:block>
+
+</html>

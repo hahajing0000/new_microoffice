@@ -1,5 +1,8 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.entity.UserEntity;
+import com.zy.microoffice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpSession;
+
 @ApiIgnore
 @Controller
 public class LoginController {
+    @Autowired
+    UserService userService;
+
     @RequestMapping("/")
     public String index(ModelMap map){
         map.put("mymsg","hi,i am zhangyue");
@@ -18,12 +26,15 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestParam("phonenumber")String phonenumber,@RequestParam("pwd")String pwd){
+    public ModelAndView login(@RequestParam("phonenumber")String phonenumber, @RequestParam("pwd")String pwd, HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        if (phonenumber.equals("zhangyue")&&pwd.equals("123")){
+        UserEntity login = userService.login(phonenumber, pwd);
+        if (login!=null){
+            httpSession.setAttribute("phonenumber", phonenumber);
             modelAndView.setViewName("index");
         }
         else{
+            httpSession.invalidate();
             modelAndView.addObject("error","用户名或者密码不存在");
         }
         return modelAndView;
