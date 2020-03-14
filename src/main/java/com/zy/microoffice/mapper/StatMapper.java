@@ -22,6 +22,20 @@ public interface StatMapper {
     boolean modifyStat(StatEntity statEntity);
 
     /**
+     * 通过面试
+     * @param id
+     * @return
+     */
+    boolean pass(int id);
+
+    /**
+     * 面试失败
+     * @param id
+     * @return
+     */
+    boolean failed(int id);
+
+    /**
      * 删除面试信息
      * @param id
      * @return

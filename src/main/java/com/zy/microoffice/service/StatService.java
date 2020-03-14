@@ -32,6 +32,24 @@ public class StatService {
     }
 
     /**
+     * 通过面试
+     * @param id
+     * @return
+     */
+    public boolean pass(int id){
+        return statMapper.pass(id);
+    }
+
+    /**
+     * 面试失败
+     * @param id
+     * @return
+     */
+    public boolean failed(int id){
+        return statMapper.failed(id);
+    }
+
+    /**
      * 删除面试信息
      * @param id
      * @return

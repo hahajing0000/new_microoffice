@@ -21,29 +21,48 @@
             <div class="card">
                 <div class="card-header">面试信息录入</div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/stat/insert}" method="post" novalidate="novalidate">
-                        <input type="hidden" name="userid" />
+<!--                    th:action="@{/stat/insert}"-->
+                    <form id="form" action="#"  method="post" novalidate="novalidate">
+                        <input type="hidden" id="id" name="id" th:value="${stat!=null}?${stat.id}" />
+                        <input type="hidden" name="phonenumber" th:value="${stat!=null}?${stat.phonenumber}" />
+
                         <div class="form-group">
                             <label for="companyname" class="control-label mb-1">公司名称</label>
-                            <input name="companyname" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
+                            <input  id="companyname" name="companyname" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${stat ne null}?${stat.companyname}" />
+<!--                            <font color="red" th:text="${companyname}"></font>-->
                         </div>
                         <div class="form-group">
                             <label for="post" class="control-label mb-1">职位名称</label>
-                            <input  name="post" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
+                            <input  id="post" name="post" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${stat!=null}?${stat.post}" />
+<!--                            <font color="red" th:text="${post}"></font>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="area" class="control-label mb-1">所在城市</label>
+                            <select id="area" name="area" class="form-control-sm form-control">
+                                <option value="-1">请选择所在城市</option>
+                                <option th:selected="${stat!=null}?${stat.area == '北京'}" value="北京">北京</option>
+                                <option th:selected="${stat!=null}?${stat.area == '南京'}" value="南京">南京</option>
+                                <option th:selected="${stat!=null}?${stat.area == '杭州'}" value="杭州">杭州</option>
+                                <option th:selected="${stat!=null}?${stat.area == '上海'}" value="上海">上海</option>
+                                <option th:selected="${stat!=null}?${stat.area == '深圳'}" value="深圳">深圳</option>
+                                <option th:selected="${stat!=null}?${stat.area == '天津'}" value="天津">天津</option>
+                                <option th:selected="${stat!=null}?${stat.area == '广州'}" value="广州">广州</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="requestinfo" class="control-label mb-1">职位需求</label>
-                            <textarea name="requestinfo"  rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
+                            <textarea id="requestinfo" th:text="${stat!=null}?${stat.requestinfo}" name="requestinfo" rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="interviewtime" class="control-label mb-1">面试时间</label>
                             <div class="input-append date" id="datetimepickerstart">
-                                <input name="interviewtime" size="16" class="form-control" type="text" readonly>
+                                <input id="interviewtime" name="interviewtime" size="16" th:value="${stat!=null}?${stat.interviewtime}" class="form-control" type="text" readonly />
                                 <span class="add-on"><i class="icon-th"></i></span>
                             </div>
+<!--                            <font color="red" th:text="${interviewtime}"></font>-->
                         </div>
                         <div>
-                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                            <button id="btn_save" class="btn btn-lg btn-info btn-block">
                                 <i class="fa fa-save fa-lg"></i>&nbsp;
                                 <span id="payment-button-amount">保存</span>
                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
@@ -75,6 +94,39 @@
                 todayHighlight: 1,
                 pickerPosition: 'top-right',
             });
+
+            $("#btn_save").click(function(){
+                var companyname=$("#companyname").val();
+                var post=$("#post").val();
+                var requestinfo=$("#requestinfo").val();
+                var interviewtime=$("#interviewtime").val();
+                var area=$("#area").val();
+                if(isNull(companyname)){
+                    showMsg("请输入公司名称");
+                    return false;
+                }
+                if(isNull(post)){
+                    showMsg("请输入职位");
+                    return false;
+                }
+                if(isNull(interviewtime)){
+                    showMsg("请输入面试时间");
+                    return false;
+                }
+                if(area=="-1"){
+                    showMsg("请选择所在城市");
+                    return false;
+                }
+                var id= $("#id").val();
+                if(isNull(id)){
+                    $("#form").attr("action","/stat/insert").submit();
+                }
+                else{
+                    $("#form").attr("action","/stat/modify").submit();
+                }
+
+            });
+
 
         });
     </script>

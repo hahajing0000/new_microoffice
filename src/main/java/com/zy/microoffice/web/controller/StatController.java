@@ -1,17 +1,18 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.config.ConstValue;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.service.StatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @ApiIgnore
@@ -42,15 +43,57 @@ public class StatController {
         return "statedit";
     }
 
+    @RequestMapping("/toEdit")
+    public String toEdit(int id,Model model){
+        StatEntity stat = statService.getStatById(id);
+        model.addAttribute("stat", stat);
+        return "statedit";
+    }
+
     @PostMapping(value = "/insert")
-    public String insert(StatEntity statEntity, BindingResult bindingResult){
+    public String insert(StatEntity statEntity,BindingResult bindingResult, HttpSession session){
+//        if (bindingResult.hasErrors()){
+//            for (ObjectError error:
+//                 bindingResult.getAllErrors()) {
+//               String field=  bindingResult.getFieldError().getField();
+//               String e=bindingResult.getFieldError().getDefaultMessage();
+//               model.addAttribute(field, e);
+//               break;
+//            }
+//            return "statedit";
+//        }
+        //从Session中获取PhoneNumber
+        String phonenumber= (String) session.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        statEntity.setPhonenumber(phonenumber);
         statService.addStat(statEntity);
         return "redirect:findstats";
     }
 
     @PostMapping(value = "/modify")
-    public String modify(StatEntity statEntity, BindingResult bindingResult){
+    public String modify(StatEntity statEntity,BindingResult bindingResult){
         statService.modifyStat(statEntity);
+        return "redirect:findstats";
+    }
+
+    /**
+     * 通过面试
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/pass")
+    public String pass(int id){
+         statService.pass(id);
+         return "redirect:findstats";
+    }
+
+    /**
+     * 面试失败
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/failed")
+    public String failed(int id){
+        statService.failed(id);
         return "redirect:findstats";
     }
 

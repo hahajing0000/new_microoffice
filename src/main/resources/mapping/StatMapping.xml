@@ -6,19 +6,28 @@
 
     </resultMap>
     <insert id="addStat">
-        insert into b_stat(userid,companyname,post,interviewtime,interviewresult,requestinfo,ctime) values(#{userid},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE())
+        insert into b_stat(phonenumber,companyname,post,interviewtime,interviewresult,requestinfo,ctime,area) values(#{phonenumber},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE(),#{area})
     </insert>
     <update id="modifyStat">
-        update b_stat set userid=#{userid},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo} where id=#{id}
+        update b_stat set phonenumber=#{phonenumber},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo},area=#{area} where id=#{id}
     </update>
+
+    <update id="pass">
+        update b_stat set interviewresult=1 where id=#{id};
+    </update>
+
+    <update id="failed">
+        update b_stat set interviewresult=-1 where id=#{id};
+    </update>
+
     <delete id="remove">
         delete from b_stat where id=#{id}
     </delete>
     <select id="getStatById" parameterType="int" resultType="com.zy.microoffice.entity.StatEntity">
-        select s.*,u.realname from b_stat s,s_user u where s.userid=u.id and s.id=#{id};
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.id=#{id};
     </select>
     <select id="getStats" parameterType="String" resultType="com.zy.microoffice.entity.StatEntity">
-        select s.*,u.realname from b_stat s,s_user u where s.userid=u.id
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber
         <if test="starttime != null and starttime != ''">
             and s.interviewtime &gt;= #{starttime}
         </if>

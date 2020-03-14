@@ -1,5 +1,6 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.config.ConstValue;
 import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class LoginController {
         ModelAndView modelAndView=new ModelAndView();
         UserEntity login = userService.login(phonenumber, pwd);
         if (login!=null){
-            httpSession.setAttribute("phonenumber", phonenumber);
+            //用户登录后将PhoneBumber存入到Session中
+            httpSession.setAttribute(ConstValue.USER_PHONENUMBER_KEY, phonenumber);
             modelAndView.setViewName("index");
         }
         else{

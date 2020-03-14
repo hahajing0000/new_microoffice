@@ -4652,6 +4652,10 @@ section {
     padding: 0 14px;
 }
 
+.status--start {
+    color: #f8ac09;
+}
+
 .status--process {
     color: #00ad5f;
 }
