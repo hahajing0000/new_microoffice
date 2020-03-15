@@ -6,10 +6,21 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @ApiIgnore
 @Controller
+@RequestMapping(value = "/index")
 public class IndexController {
 
     @RequestMapping("/stat")
     public String gotoStat(){
-        return "redirect:stat/findstats";
+        return "redirect:/stat/findstats";
+    }
+
+    @RequestMapping("/calendar")
+    public String gotoCalendar(){
+        return "redirect:/calendar/getdata";
+    }
+
+    @RequestMapping("/index")
+    public String gotoIndex(){
+        return "index";
     }
 }

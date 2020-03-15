@@ -55,5 +55,5 @@ public interface StatMapper {
      * @param endtime
      * @return
      */
-    List<StatEntity> getStats(String starttime,String endtime);
+    List<StatEntity> getStats(String phonenumber,String starttime,String endtime);
 }

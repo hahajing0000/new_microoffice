@@ -28,12 +28,16 @@
     </select>
     <select id="getStats" parameterType="String" resultType="com.zy.microoffice.entity.StatEntity">
         select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber
+        <if test="phonenumber != null and phonenumber != ''">
+            and s.phonenumber=#{phonenumber}
+        </if>
         <if test="starttime != null and starttime != ''">
             and s.interviewtime &gt;= #{starttime}
         </if>
         <if test="endtime != null and endtime != ''">
             and s.interviewtime &lt;= #{endtime}
         </if>
+        order by s.ctime desc;
     </select>
 
 </mapper>

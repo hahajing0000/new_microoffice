@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base :: common_header(~{::title},~{::link})">
+    <!-- Title Page-->
+    <title>微办公系统</title>
+     <!-- Vendor CSS-->
+    <link th:href="@{/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/wow/animate.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/slick/slick.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
+    <link th:href="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
+
+    <!-- FullCalendar -->
+    <link th:href="@{/vendor/fullcalendar-3.10.0/fullcalendar.css}" rel='stylesheet' media="all" />
+    <style type="text/css">
+    /* force class color to override the bootstrap base rule
+       NOTE: adding 'url: #' to calendar makes this unneeded
+     */
+    .fc-event, .fc-event:hover {
+          color: #fff !important;
+          text-decoration: none;
+    }
+    </style>
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+
+    <div th:replace="~{menu :: systemmenu}"></div>
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <div th:replace="~{titlebar :: titlebar}"></div>
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                      <div class="au-card">
+                        <div id="calendar"></div>
+                      </div>
+                    </div><!-- .col -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+    </div>
+
+</div>
+
+
+<th:block th:replace="javascript::scripts(~{::script})">
+  <!-- Vendor JS       -->
+    <script th:src="@{/vendor/slick/slick.min.js}">
+    </script>
+    <script th:src="@{/vendor/wow/wow.min.js}"></script>
+    <script th:src="@{/vendor/animsition/animsition.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}">
+    </script>
+    <script th:src="@{/vendor/counter-up/jquery.waypoints.min.js}"></script>
+    <script th:src="@{/vendor/counter-up/jquery.counterup.min.js}">
+    </script>
+    <script th:src="@{/vendor/circle-progress/circle-progress.min.js}"></script>
+    <script th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.js}"></script>
+    <script th:src="@{/vendor/chartjs/Chart.bundle.min.js}"></script>
+    <script th:src="@{/vendor/select2/select2.min.js}"></script>
+
+    <!-- full calendar requires moment along jquery which is included above -->
+    <script th:src="@{/vendor/fullcalendar-3.10.0/lib/moment.min.js}"></script>
+    <script th:src="@{/vendor/fullcalendar-3.10.0/fullcalendar.js}"></script>
+
+    <!-- Main JS-->
+    <script th:src="@{/js/main.js}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+
+
+          // setup a few events
+          $('#calendar').fullCalendar({
+
+          });
+        });
+    </script>
+</th:block>
+
+</body>
+
+</html>
+<!-- end document-->

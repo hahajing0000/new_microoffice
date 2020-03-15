@@ -10,16 +10,18 @@
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
+
                 <li class="active has-sub">
-                    <a class="js-arrow" href="index.html">
+                    <a class="js-arrow" th:href="@{/index/index}">
                         <i class="fas fa-tachometer-alt"></i>[[#{index.menu_home}]]</a>
                 </li>
                 <li>
-                    <form action="/stat" method="get">
-                        <button type="submit">
-                            <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</button>
-                    </form>
-
+                    <a class="js-arrow" th:href="@{/index/calendar}">
+                        <i class="fas fa-calendar-alt"></i>[[#{index.info_time}]]</a>
+                </li>
+                <li>
+                    <a class="js-arrow" th:href="@{/index/stat}">
+                            <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</a>
                 </li>
             </ul>
         </nav>

@@ -5,6 +5,7 @@ import com.zy.microoffice.entity.UserEntity;
 import com.zy.microoffice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +28,18 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestParam("phonenumber")String phonenumber, @RequestParam("pwd")String pwd, HttpSession httpSession){
-        ModelAndView modelAndView=new ModelAndView();
+    public String login(@RequestParam("phonenumber")String phonenumber, @RequestParam("pwd")String pwd, HttpSession httpSession, Model model){
+
         UserEntity login = userService.login(phonenumber, pwd);
         if (login!=null){
             //用户登录后将PhoneBumber存入到Session中
             httpSession.setAttribute(ConstValue.USER_PHONENUMBER_KEY, phonenumber);
-            modelAndView.setViewName("index");
+            return "redirect:index/index";
         }
         else{
             httpSession.invalidate();
-            modelAndView.addObject("error","用户名或者密码不存在");
+            model.addAttribute("error","用户名或者密码不存在");
         }
-        return modelAndView;
+        return "login";
     }
 }

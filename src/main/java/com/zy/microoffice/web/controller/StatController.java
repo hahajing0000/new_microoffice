@@ -24,16 +24,20 @@ public class StatController {
 
     @RequestMapping("/")
     public String init(Model model){
-        List<StatEntity> stats = statService.getStats("", "");
+        List<StatEntity> stats = statService.getStats("","", "");
         model.addAttribute("list",stats);
         return "stat";
     }
 
     @RequestMapping(value = "/findstats")
-    public String FindStat(Model model,String starttime,String endtime){
+    public String FindStat(Model model,String starttime,String endtime,HttpSession httpSession){
 //        if (starttime==null){starttime="";}
 //        if(endtime==null){endtime="";}
-        List<StatEntity> stats = statService.getStats(starttime, endtime);
+        String phonenumber= (String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        if (phonenumber.toLowerCase().trim().equals("admin")){
+            phonenumber="";
+        }
+        List<StatEntity> stats = statService.getStats(phonenumber,starttime, endtime);
         model.addAttribute("list",stats);
         return "stat";
     }

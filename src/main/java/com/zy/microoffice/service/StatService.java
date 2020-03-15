@@ -73,7 +73,7 @@ public class StatService {
      * @param endtime
      * @return
      */
-    public List<StatEntity> getStats(String starttime, String endtime){
-        return statMapper.getStats(starttime,endtime);
+    public List<StatEntity> getStats(String phonenumber,String starttime, String endtime){
+        return statMapper.getStats(phonenumber,starttime,endtime);
     }
 }

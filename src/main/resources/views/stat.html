@@ -4,6 +4,7 @@
 <head th:replace="base :: common_header(~{::title},~{::link})">
     <!-- Title Page-->
     <title>微办公系统</title>
+<!--    <base th:href="${#request.getContextPath()}">-->
     <link th:href="@{/datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="all">
 </head>
 
@@ -23,6 +24,7 @@
 
             <div class="table-data__tool">
                 <div class="table-data__tool-left">
+                    <form id="frm_search" th:action="@{/stat/findstats}" method="get">
                     <div class="row" style="margin-left:30rm;">
                             <div style="margin-left: 3rem;"></div>
                             开始时间:
@@ -49,6 +51,7 @@
                         <i class="zmdi zmdi-plus"></i>[[#{stat.add}]]</a>
 
                 </div>
+                </form>
             </div>
             <div class="table-responsive table-responsive-data2">
                 <table class="table table-borderless table-striped table-earning">
@@ -114,7 +117,7 @@
 </div>
 
 
-<th:block th:replace="javascript::scripts(~{::script})">
+<th:block th:replace="javascript :: scripts(~{::script})">
     <script th:src="@{/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
     <script th:src="@{/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
     <script type="text/javascript">
@@ -165,7 +168,7 @@
             });
             //检索
             $("#btn_search").click(function(){
-                
+                $("#frm_search").submit();
             });
             
         });
