@@ -18,7 +18,7 @@
 <body class="animsition">
     <div class="page-wrapper">
 
-        <div th:replace="~{menu :: systemmenu}"></div>
+        <div th:replace="~{menu :: systemmenu(activeUri='index')}"></div>
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
@@ -30,31 +30,70 @@
                     <div class="container-fluid">
 
                         <div class="row m-t-25">
-                            <div class="col-sm-24 col-lg-24">
+                            <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c1">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                                                <i class="fa fa-group"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>10</h2>
-                                                <span>面试通过人数</span>
+                                                <h2 th:text="${offercount}">10</h2>
+                                                <span>有Offer人数</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+<!--                                            <canvas id="widgetChart1"></canvas>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="fa fa-male"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 th:text="${todaycount}">4人</h2>
+                                                <span>今日面试人数</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+<!--                                            <canvas id="widgetChart2"></canvas>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 th:text="${successrate}+'%'">50%</h2>
+                                                <span>面试成功率</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+<!--                                            <canvas id="widgetChart3"></canvas>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+
+
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2">recent reports</h3>
+                                        <h3 class="title-2">面试统计</h3>
                                         <div class="chart-info">
                                             <div class="chart-info__left">
                                                 <div class="chart-note">
@@ -88,29 +127,64 @@
                             <div class="col-lg-6">
                                 <div class="au-card chart-percent-card">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 tm-b-5">char by %</h3>
+                                        <h3 class="title-2 tm-b-5">Offer 比例%</h3>
                                         <div class="row no-gutters">
                                             <div class="col-xl-6">
                                                 <div class="chart-note-wrap">
                                                     <div class="chart-note mr-0 d-block">
                                                         <span class="dot dot--blue"></span>
-                                                        <span>products</span>
+                                                        <span>没有Offer</span>
                                                     </div>
                                                     <div class="chart-note mr-0 d-block">
                                                         <span class="dot dot--red"></span>
-                                                        <span>services</span>
+                                                        <span>已获得Offer</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="percent-chart">
-                                                    <canvas id="percent-chart"></canvas>
+                                                    <canvas id="successrate"></canvas>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row" style="color: white;margin-bottom: 1rem;">
+                            <div class="col-lg-12 au-card au-card--bg-blue au-card-top-countries">
+                                <div class="au-card-inner">
+                                    <div class="table-responsive">
+                                        <table class="table table-top-countries">
+                                            <thead>
+                                            <tr>
+                                                <th>姓名</th>
+                                                <th>面试公司</th>
+                                                <th>职位</th>
+                                                <th>所在城市</th>
+                                                <th>面试时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+<!--                                            <tr th:if="${list.size()} eq 0">-->
+<!--                                                <td colspan="8">暂时还没有面试成功的数据！</td>-->
+<!--                                            </tr>-->
+                                            <tr th:each="stat : ${list}" class="tr-shadow">
+                                                <td th:text="${stat.realname}">张三</td>
+                                                <td>
+                                                    <span class="block-email" th:text="${stat.companyname}">XX公司</span>
+                                                </td>
+                                                <td class="desc" th:text="${stat.post}">Android开发</td>
+                                                <td class="desc" th:text="${stat.area}">北京</td>
+                                                <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -143,6 +217,71 @@
        </script>
        <!-- Main JS-->
        <script th:src="@{/js/main.js}"></script>
+       <script>
+           function loadDataBySuccessRate(failedcount,successcount){
+               
+                 // Percent Chart
+                var ctx = document.getElementById("successrate");
+                if (ctx) {
+                    ctx.height = 280;
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                        datasets: [
+                            {
+                            label: "My First dataset",
+                            data: [failedcount, successcount],
+                            backgroundColor: [
+                                '#00b5e9',
+                                '#fa4251'
+                            ],
+                            hoverBackgroundColor: [
+                                '#00b5e9',
+                                '#fa4251'
+                            ],
+                            borderWidth: [
+                                0, 0
+                            ],
+                            hoverBorderColor: [
+                                'transparent',
+                                'transparent'
+                            ]
+                            }
+                        ],
+                        labels: [
+                            '没有offer',
+                            '有offer'
+                        ]
+                        },
+                        options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        cutoutPercentage: 55,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            titleFontFamily: "Poppins",
+                            xPadding: 15,
+                            yPadding: 10,
+                            caretPadding: 0,
+                            bodyFontSize: 16
+                        }
+                        }
+                    });
+                }
+            }
+           $(document).ready(function(){
+            var allcount=[[${successstat.allcount}]];
+               var successcount=[[${successstat.successcount}]];
+               var failedcount=allcount-successcount;
+            loadDataBySuccessRate(failedcount,successcount);
+           });
+       </script>
    </th:block>
 
 </body>

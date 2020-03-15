@@ -40,4 +40,24 @@
         order by s.ctime desc;
     </select>
 
+    <select id="getOfferCount" resultType="int">
+        select count(*) from (select count(phonenumber)  from b_stat GROUP BY phonenumber,interviewresult HAVING interviewresult=1) t
+    </select>
+    <select id="getInterViewCountToday" resultType="int">
+        select count(DISTINCT phonenumber) from b_stat where TO_DAYS(interviewtime) = TO_DAYS(now())
+    </select>
+    <select id="getInterViewSuccess" resultType="int">
+        select FORMAT((select count(*) from b_stat where interviewresult=1)/(select count(*) from b_stat),2)*100 AS R
+    </select>
+    <select id="getStatEntityBySuccess" resultType="com.zy.microoffice.entity.StatEntity">
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.interviewresult=1
+    </select>
+    <select id="getSuceessRate" resultType="java.util.HashMap">
+        select (select count(DISTINCT phonenumber) as a from b_stat) as allcount,(select count(DISTINCT phonenumber) from b_stat where interviewresult=1) as successcount
+    </select>
+
+    <select id="getCalendarData" resultType="com.zy.microoffice.entity.CalendarEntity">
+        select CONCAT(u.realname,' - ',s.companyname) as title,s.interviewtime as start,s.id as statid from b_stat s,s_user u where s.phonenumber=u.phonenumber
+    </select>
+
 </mapper>

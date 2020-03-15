@@ -26,10 +26,10 @@
     </style>
 </head>
 
-<body class="animsition">
+<body>
 <div class="page-wrapper">
 
-    <div th:replace="~{menu :: systemmenu}"></div>
+    <div th:replace="~{menu :: systemmenu(activeUri='calendar')}"></div>
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col">
                       <div class="au-card">
-                        <div id="calendar"></div>
+                        <div id="mCalendar"></div>
                       </div>
                     </div><!-- .col -->
                 </div>
@@ -63,7 +63,6 @@
     <script th:src="@{/vendor/slick/slick.min.js}">
     </script>
     <script th:src="@{/vendor/wow/wow.min.js}"></script>
-    <script th:src="@{/vendor/animsition/animsition.min.js}"></script>
     <script th:src="@{/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js}">
     </script>
     <script th:src="@{/vendor/counter-up/jquery.waypoints.min.js}"></script>
@@ -82,11 +81,34 @@
     <script th:src="@{/js/main.js}"></script>
 
     <script type="text/javascript">
+        var initialLocaleCode = 'zh-cn'; //中文
         $(function() {
 
 
           // setup a few events
-          $('#calendar').fullCalendar({
+          $('#mCalendar').fullCalendar({
+            themeSystem: 'bootstrap3',
+            header: {
+                    left: 'prev,next today myCustomButton',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+            locale: initialLocaleCode,
+            //displayEventTime: false,
+            displayEventEnd: true,
+            eventLimit: 3,
+            eventLimitText: '更多',
+            editable: true,
+            events:{
+                url:'/calendar/loadData',
+                color: 'orange',   // an option!
+                textColor: 'white'
+            },
+             eventClick: function(calEvent, jsEvent, view) {
+                    var id=calEvent.statid;
+                    window.location.href='/calendar/gotoStatDetail?id='+id;
+                    return false;
+                }
 
           });
         });

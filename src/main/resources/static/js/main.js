@@ -1272,9 +1272,9 @@
       overlay: false,
       overlayClass: 'animsition-overlay-slide',
       overlayParentElement: 'html',
-      transition: function (url) {
-        window.location.href = url;
-      }
+//      transition: function (url) {
+//        window.location.href = url;
+//      }
     });
   
   

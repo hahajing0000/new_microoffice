@@ -1,10 +1,12 @@
 package com.zy.microoffice.service;
 
+import com.zy.microoffice.entity.CalendarEntity;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.mapper.StatMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -75,5 +77,53 @@ public class StatService {
      */
     public List<StatEntity> getStats(String phonenumber,String starttime, String endtime){
         return statMapper.getStats(phonenumber,starttime,endtime);
+    }
+
+    /**
+     * 获取有Offer的人数
+     * @return
+     */
+    public int getOfferCount(){
+        return statMapper.getOfferCount();
+    }
+
+    /**
+     * 获取今天面试人数
+     * @return
+     */
+    public int getInterViewCountToday(){
+        return statMapper.getInterViewCountToday();
+    }
+
+    /**
+     * 获取面试成功率
+     * @return
+     */
+    public double getInterViewSuccess(){
+        return statMapper.getInterViewSuccess();
+    }
+
+    /**
+     * 获取已经下Offer的面试信息
+     * @return
+     */
+    public List<StatEntity> getStatEntityBySuccess(){
+        return statMapper.getStatEntityBySuccess();
+    }
+
+    /**
+     * 获取面试成功统计数据
+     * @return
+     */
+    public HashMap<String,Integer> getSuceessRate(){
+        return statMapper.getSuceessRate();
+    }
+
+    /**
+     * 获取日历相关数据
+     * @return
+     */
+    public List<CalendarEntity> getCalendarData(){
+        return statMapper.getCalendarData();
     }
 }

@@ -1,8 +1,10 @@
 package com.zy.microoffice.mapper;
 
+import com.zy.microoffice.entity.CalendarEntity;
 import com.zy.microoffice.entity.StatEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -56,4 +58,40 @@ public interface StatMapper {
      * @return
      */
     List<StatEntity> getStats(String phonenumber,String starttime,String endtime);
+
+    /**
+     * 获取有Offer的人数
+     * @return
+     */
+    int getOfferCount();
+
+    /**
+     * 获取今天面试人数
+     * @return
+     */
+    int getInterViewCountToday();
+
+    /**
+     * 获取面试成功率
+     * @return
+     */
+    int getInterViewSuccess();
+
+    /**
+     * 获取已经下Offer的面试信息
+     * @return
+     */
+    List<StatEntity> getStatEntityBySuccess();
+
+    /**
+     * 获取面试成功统计数据
+     * @return
+     */
+    HashMap<String,Integer> getSuceessRate();
+
+    /**
+     * 获取日历相关数据
+     * @return
+     */
+    List<CalendarEntity> getCalendarData();
 }

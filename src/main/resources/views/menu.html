@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!-- MENU SIDEBAR-->
-<aside class="menu-sidebar d-none d-lg-block" th:fragment="systemmenu">
+<aside class="menu-sidebar d-none d-lg-block" th:fragment="systemmenu(activeUri)">
     <div class="logo">
         <a href="#">
             <img th:src="@{/images/icon/logo.png}" alt="Cool Admin" />
@@ -11,15 +11,15 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
 
-                <li class="active has-sub">
+                <li class="active has-sub" th:class="${activeUri=='index'}?'active has-sub':'has-sub'">
                     <a class="js-arrow" th:href="@{/index/index}">
                         <i class="fas fa-tachometer-alt"></i>[[#{index.menu_home}]]</a>
                 </li>
-                <li>
+                <li th:class="${activeUri=='calendar'}?'active has-sub':'has-sub'">
                     <a class="js-arrow" th:href="@{/index/calendar}">
                         <i class="fas fa-calendar-alt"></i>[[#{index.info_time}]]</a>
                 </li>
-                <li>
+                <li th:class="${activeUri=='stat'}?'active has-sub':'has-sub'">
                     <a class="js-arrow" th:href="@{/index/stat}">
                             <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</a>
                 </li>

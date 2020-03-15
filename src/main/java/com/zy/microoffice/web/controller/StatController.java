@@ -56,16 +56,6 @@ public class StatController {
 
     @PostMapping(value = "/insert")
     public String insert(StatEntity statEntity,BindingResult bindingResult, HttpSession session){
-//        if (bindingResult.hasErrors()){
-//            for (ObjectError error:
-//                 bindingResult.getAllErrors()) {
-//               String field=  bindingResult.getFieldError().getField();
-//               String e=bindingResult.getFieldError().getDefaultMessage();
-//               model.addAttribute(field, e);
-//               break;
-//            }
-//            return "statedit";
-//        }
         //从Session中获取PhoneNumber
         String phonenumber= (String) session.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
         statEntity.setPhonenumber(phonenumber);

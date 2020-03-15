@@ -7,10 +7,10 @@
     <link th:href="@{/datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="all">
 </head>
 
-<body class="animsition">
+<body>
 <div class="page-wrapper">
 
-    <div th:replace="~{menu :: systemmenu}"></div>
+    <div th:replace="~{menu :: systemmenu(_)}"></div>
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -19,7 +19,10 @@
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="card">
-                <div class="card-header">面试信息录入</div>
+                <div class="card-header">
+                    <button id="btn_back" class="btn btn-danger btn-sm" th:if="${flag}!=null">返回</button>
+                    面试信息录入
+                </div>
                 <div class="card-body">
 <!--                    th:action="@{/stat/insert}"-->
                     <form id="form" action="#"  method="post" novalidate="novalidate">
@@ -61,7 +64,7 @@
                             </div>
 <!--                            <font color="red" th:text="${interviewtime}"></font>-->
                         </div>
-                        <div>
+                        <div th:if="${flag}==null">
                             <button id="btn_save" class="btn btn-lg btn-info btn-block">
                                 <i class="fa fa-save fa-lg"></i>&nbsp;
                                 <span id="payment-button-amount">保存</span>
@@ -93,6 +96,10 @@
                 autoclose: true,
                 todayHighlight: 1,
                 pickerPosition: 'top-right',
+            });
+
+            $("#btn_back").click(function(){
+                window.history.back();
             });
 
             $("#btn_save").click(function(){
