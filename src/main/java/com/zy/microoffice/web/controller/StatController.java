@@ -24,21 +24,23 @@ public class StatController {
 
     @RequestMapping("/")
     public String init(Model model){
-        List<StatEntity> stats = statService.getStats("","", "");
+        List<StatEntity> stats = statService.getStats("","", "",-1);
         model.addAttribute("list",stats);
         return "stat";
     }
 
     @RequestMapping(value = "/findstats")
-    public String FindStat(Model model,String starttime,String endtime,HttpSession httpSession){
+    public String FindStat(Model model,String starttime,String endtime,int page,HttpSession httpSession){
 //        if (starttime==null){starttime="";}
 //        if(endtime==null){endtime="";}
         String phonenumber= (String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
         if (phonenumber.toLowerCase().trim().equals("admin")){
             phonenumber="";
         }
-        List<StatEntity> stats = statService.getStats(phonenumber,starttime, endtime);
+        List<StatEntity> stats = statService.getStats(phonenumber,starttime, endtime,page);
         model.addAttribute("list",stats);
+        int dataCount = statService.getDataCount(phonenumber);
+        model.addAttribute("datacount", dataCount);
         return "stat";
     }
 
@@ -60,13 +62,13 @@ public class StatController {
         String phonenumber= (String) session.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
         statEntity.setPhonenumber(phonenumber);
         statService.addStat(statEntity);
-        return "redirect:findstats";
+        return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @PostMapping(value = "/modify")
     public String modify(StatEntity statEntity,BindingResult bindingResult){
         statService.modifyStat(statEntity);
-        return "redirect:findstats";
+        return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     /**
@@ -77,7 +79,7 @@ public class StatController {
     @PostMapping(value = "/pass")
     public String pass(int id){
          statService.pass(id);
-         return "redirect:findstats";
+         return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     /**
@@ -88,13 +90,13 @@ public class StatController {
     @PostMapping(value = "/failed")
     public String failed(int id){
         statService.failed(id);
-        return "redirect:findstats";
+        return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping(value = "/delete")
     public String delete(int id){
         statService.remove(id);
-        return "redirect:findstats";
+        return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping(value = "/getId")

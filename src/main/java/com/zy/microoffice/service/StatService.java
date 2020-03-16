@@ -1,6 +1,7 @@
 package com.zy.microoffice.service;
 
 import com.zy.microoffice.entity.CalendarEntity;
+import com.zy.microoffice.entity.InterViewCountEntity;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.mapper.StatMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,17 @@ public class StatService {
      * @param endtime
      * @return
      */
-    public List<StatEntity> getStats(String phonenumber,String starttime, String endtime){
-        return statMapper.getStats(phonenumber,starttime,endtime);
+    public List<StatEntity> getStats(String phonenumber,String starttime, String endtime,int page){
+        return statMapper.getStats(phonenumber,starttime,endtime,page);
+    }
+
+    /**
+     * 根据手机号码获取数据页数
+     * @param phonenumber
+     * @return
+     */
+    public int getDataCount(String phonenumber){
+        return statMapper.getDataCount(phonenumber);
     }
 
     /**
@@ -125,5 +135,13 @@ public class StatService {
      */
     public List<CalendarEntity> getCalendarData(){
         return statMapper.getCalendarData();
+    }
+
+    /**
+     * 获取用户预约面试数量
+     * @return
+     */
+    public List<InterViewCountEntity> getUserInterViewCount(){
+        return statMapper.getUserInterViewCount();
     }
 }

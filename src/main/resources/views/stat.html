@@ -8,7 +8,7 @@
     <link th:href="@{/datetimepicker/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="all">
 </head>
 
-<body class="animsition">
+<body>
 <div class="page-wrapper">
 
     <div th:replace="~{menu :: systemmenu(activeUri='stat')}"></div>
@@ -19,97 +19,112 @@
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-            <!-- DATA TABLE -->
-<!--            <h3 class="title-5 m-b-35">1705A面试情况</h3>-->
-
-            <div class="table-data__tool">
-                <div class="table-data__tool-left">
-                    <form id="frm_search" th:action="@{/stat/findstats}" method="get">
-                    <div class="row" style="margin-left:30rm;">
-                            <div style="margin-left: 3rem;"></div>
-                            开始时间:
-                            <div class="input-append date" id="datetimepickerstart">
-                                <input size="16" id="starttime" name="starttime" type="text" readonly>
-                                <span class="add-on"><i class="icon-th"></i></span>
-                            </div>
-
-
-
-                           结束时间:
-                           <div class="input-append date" id="datetimepickerend">
-                               <input size="16" id="endtime" name="endtime" type="text" readonly>
-                               <span class="add-on"><i class="icon-th"></i></span>
-                           </div>
-
-
+                <div class="container-fluid">
+                    <!-- DATA TABLE -->
+                    <!--            <h3 class="title-5 m-b-35">1705A面试情况</h3>-->
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left">
+                            <form id="frm_search" th:action="@{/stat/findstats}" method="get">
+                                <div class="row" style="margin-left:30rm;">
+                                    <div style="margin-left: 3rem;"></div>
+                                    开始时间:
+                                    <div class="input-append date" id="datetimepickerstart">
+                                        <input size="16" id="starttime" name="starttime" type="text" readonly>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+    
+                                    结束时间:
+                                    <div class="input-append date" id="datetimepickerend">
+                                        <input size="16" id="endtime" name="endtime" type="text" readonly>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+    
+    
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-data__tool-right">
+                            <button id="btn_search" class="btn btn-danger">开始检索</button>
+                            <a href="/stat/toAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                <i class="zmdi zmdi-plus"></i>[[#{stat.add}]]</a>
+    
+                        </div>
+                        </form>
                     </div>
+    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive table--no-card m-b-30">
+                                <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>面试公司</th>
+                                        <th>职位</th>
+                                        <th>所在城市</th>
+                                        <th>面试时间</th>
+                                        <th>面试结果</th>
+                                        <th>薪资</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:if="${list.size()} eq 0">
+                                        <td colspan="8">没有面试信息！</td>
+                                    </tr>
+                                    <tr th:each="stat : ${list}" class="tr-shadow">
+                                        <td th:text="${stat.realname}">张三</td>
+                                        <td>
+                                            <span class="block-email" th:text="${stat.companyname}">XX公司</span>
+                                        </td>
+                                        <td class="desc" th:text="${stat.post}">Android开发</td>
+                                        <td class="desc" th:text="${stat.area}">北京</td>
+                                        <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
+                                        <td th:switch="${stat.interviewresult}">
+                                            <span th:case="0" class="status--start" style="background-color: slategray;font-weight: bold;color: white;padding: 0.3rem;">未开始</span>
+                                            <span th:case="1" class="status--process" style="background-color:green;font-weight: bold;color: white;padding: 0.3rem;">成功！！！</span>
+                                            <span th:case="-1" class="status--denied" style="background-color: orange;font-weight: bold;color: white;padding: 0.3rem;" >未通过</span>
+                                        </td>
+                                        <td class="desc" th:text="${stat.pay}">20K</td>
+                                        <td>
+                                            <div class="table-data-feature">
+    
+                                                <a th:href="@{/stat/toEdit(id=${stat.id})}" class="item" data-toggle="tooltip" data-placement="top" title="编辑面试信息">
+                                                    <i class="zmdi zmdi-edit" style="color: green;"></i>
+                                                </a>
+                                                <button class="item" th:onclick="'javascript:del('+${stat.id}+')'" data-toggle="tooltip" data-placement="top" title="删除面试信息">
+                                                    <i class="zmdi zmdi-delete" style="color: orange;"></i>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip" th:onclick="'javascript:pass('+${stat.id}+')'" data-placement="top" title="通过面试">
+                                                    <i class="fa fa-trophy" style="color:orangered;"></i>
+                                                </button>
+                                                <button class="item" data-toggle="tooltip" th:onclick="'javascript:failed('+${stat.id}+')'" data-placement="top" title="挑战失败">
+                                                    <i class="fa fa-frown-o" style="color:gray;"></i>
+                                                </button>
+                                                <form id="form_submit" method="POST"></form>
+    
+                                            </div>
+                                        </td>
 
-                </div>
-                <div class="table-data__tool-right">
-                    <button id="btn_search" class="btn btn-danger">开始检索</button>
-                    <a href="/stat/toAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                        <i class="zmdi zmdi-plus"></i>[[#{stat.add}]]</a>
-
-                </div>
-                </form>
-            </div>
-            <div class="table-responsive table-responsive-data2">
-                <table class="table table-borderless table-striped table-earning">
-                    <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>面试公司</th>
-                        <th>职位</th>
-                        <th>所在城市</th>
-                        <th>面试时间</th>
-                        <th>面试结果</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${list.size()} eq 0">
-                        <td colspan="8">没有面试信息！</td>
-                    </tr>
-                    <tr th:each="stat : ${list}" class="tr-shadow">
-                        <td th:text="${stat.realname}">张三</td>
-                        <td>
-                            <span class="block-email" th:text="${stat.companyname}">XX公司</span>
-                        </td>
-                        <td class="desc" th:text="${stat.post}">Android开发</td>
-                        <td class="desc" th:text="${stat.area}">北京</td>
-                        <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
-                        <td th:switch="${stat.interviewresult}">
-                            <span th:case="0" class="status--start" style="background-color: slategray;font-weight: bold;color: white;padding: 0.3rem;">未开始</span>
-                            <span th:case="1" class="status--process" style="background-color:green;font-weight: bold;color: white;padding: 0.3rem;">成功！！！</span>
-                            <span th:case="-1" class="status--denied" style="background-color: orange;font-weight: bold;color: white;padding: 0.3rem;" >未通过</span>
-                        </td>
-                        <td>
-                            <div class="table-data-feature">
-
-                                <a th:href="@{/stat/toEdit(id=${stat.id})}" class="item" data-toggle="tooltip" data-placement="top" title="编辑面试信息">
-                                    <i class="zmdi zmdi-edit" style="color: green;"></i>
-                                </a>
-                                <button class="item" th:onclick="'javascript:del('+${stat.id}+')'" data-toggle="tooltip" data-placement="top" title="删除面试信息">
-                                    <i class="zmdi zmdi-delete" style="color: orange;"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" th:onclick="'javascript:pass('+${stat.id}+')'" data-placement="top" title="通过面试">
-                                    <i class="fa fa-trophy" style="color:orangered;"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" th:onclick="'javascript:failed('+${stat.id}+')'" data-placement="top" title="挑战失败">
-                                    <i class="fa fa-frown-o" style="color:gray;"></i>
-                                </button>
-                                <form id="form_submit" method="POST"></form>
-
+                                    </tr>
+                                    <tr class="spacer"></tr>
+    
+                                    </tbody>
+                                </table>
                             </div>
-                        </td>
-                    </tr>
-                    <tr class="spacer"></tr>
+                            <div class="row" th:if="${datacount}>0">
+                                <a th:each="i : ${#numbers.sequence(1,datacount)}" class="btn btn-success btn-sm" style="margin-left: 1rem;" th:href="@{/stat/findstats?starttime=&endtime=&page=}+${i-1}"> [[${i}]] 页</a>
+                            </div>
 
-                    </tbody>
-                </table>
+
+
+                        </div>
+                    </div>
+    
+                    <!-- END DATA TABLE -->
+                </div>
             </div>
-            <!-- END DATA TABLE -->
-        </div>
+            
         <!-- END MAIN CONTENT-->
         <!-- END PAGE CONTAINER-->
     </div>

@@ -1,6 +1,7 @@
 package com.zy.microoffice.mapper;
 
 import com.zy.microoffice.entity.CalendarEntity;
+import com.zy.microoffice.entity.InterViewCountEntity;
 import com.zy.microoffice.entity.StatEntity;
 import org.springframework.stereotype.Repository;
 
@@ -57,7 +58,14 @@ public interface StatMapper {
      * @param endtime
      * @return
      */
-    List<StatEntity> getStats(String phonenumber,String starttime,String endtime);
+    List<StatEntity> getStats(String phonenumber,String starttime,String endtime,int currentpage);
+
+    /**
+     * 根据手机号码获取数据页数
+     * @param phonenumber
+     * @return
+     */
+    int getDataCount(String phonenumber);
 
     /**
      * 获取有Offer的人数
@@ -94,4 +102,10 @@ public interface StatMapper {
      * @return
      */
     List<CalendarEntity> getCalendarData();
+
+    /**
+     * 获取用户预约面试数量
+     * @return
+     */
+    List<InterViewCountEntity> getUserInterViewCount();
 }

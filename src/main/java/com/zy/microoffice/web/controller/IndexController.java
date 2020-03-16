@@ -1,16 +1,17 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.entity.InterViewCountEntity;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.service.StatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @ApiIgnore
 @Controller
@@ -22,7 +23,7 @@ public class IndexController {
 
     @RequestMapping("/stat")
     public String gotoStat(){
-        return "redirect:/stat/findstats";
+        return "redirect:/stat/findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping("/calendar")
@@ -44,14 +45,29 @@ public class IndexController {
         if (statEntityBySuccess==null){
             statEntityBySuccess=new ArrayList<>();
         }
+
         model.addAttribute("offercount", offerCount);
         model.addAttribute("todaycount", interViewCountToday);
         model.addAttribute("successrate", interViewSuccess);
         model.addAttribute("list", statEntityBySuccess);
         model.addAttribute("successstat", suceessRate);
+//        List<String> keys=new ArrayList<>();
+//        List<Integer> values=new ArrayList<>();
+//        for (InterViewCountEntity item:
+//             userInterViewCount) {
+//            keys.add(item.getRealname());
+//            values.add(item.getCount());
+//        }
+//        model.addAttribute("interviewcountkey",keys);
+//        model.addAttribute("interviewcountvalues",values);
         return "index";
     }
 
-
+    @RequestMapping(value = "/getInterViewCount")
+    @ResponseBody
+    public List<InterViewCountEntity> getInterViewCount(){
+        List<InterViewCountEntity> userInterViewCount = statService.getUserInterViewCount();
+        return userInterViewCount;
+    }
 
 }

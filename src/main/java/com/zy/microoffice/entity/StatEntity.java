@@ -52,4 +52,8 @@ public class StatEntity {
      * 公司所在省市
      */
     private String area;
+    /**
+     * 薪资
+     */
+    private String pay;
 }

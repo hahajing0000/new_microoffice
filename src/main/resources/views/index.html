@@ -38,16 +38,18 @@
                                                 <i class="fa fa-group"></i>
                                             </div>
                                             <div class="text">
-                                                <h2 th:text="${offercount}">10</h2>
+                                                <h2 th:text="${offercount}+人">10</h2>
                                                 <span>有Offer人数</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
+                                            <label id="interviewCount" style="color: white;">预约总数：0 次</label>
 <!--                                            <canvas id="widgetChart1"></canvas>-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                           
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c2">
                                     <div class="overview__inner">
@@ -84,42 +86,16 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
 
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2">面试统计</h3>
-                                        <div class="chart-info">
-                                            <div class="chart-info__left">
-                                                <div class="chart-note">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>products</span>
-                                                </div>
-                                                <div class="chart-note mr-0">
-                                                    <span class="dot dot--green"></span>
-                                                    <span>services</span>
-                                                </div>
-                                            </div>
-                                            <div class="chart-info__right">
-                                                <div class="chart-statis">
-                                                    <span class="index incre">
-                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                                    <span class="label">products</span>
-                                                </div>
-                                                <div class="chart-statis mr-0">
-                                                    <span class="index decre">
-                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                                    <span class="label">services</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="recent-report__chart">
-                                            <canvas id="recent-rep-chart"></canvas>
+<!--                                        <h3 class="title-2">面试统计</h3>-->
+                                        <div class="au-card-inner">
+                                            <h5 class="title-2 m-b-40">预约面试总数统计</h5>
+                                            <canvas id="singelBar"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -164,6 +140,7 @@
                                                 <th>职位</th>
                                                 <th>所在城市</th>
                                                 <th>面试时间</th>
+                                                <th>薪资</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -178,6 +155,7 @@
                                                 <td class="desc" th:text="${stat.post}">Android开发</td>
                                                 <td class="desc" th:text="${stat.area}">北京</td>
                                                 <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
+                                                <td th:text="${stat.pay}">20K</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -275,11 +253,77 @@
                     });
                 }
             }
+
+            function loadInterViewCount(labels,data){
+                    // single bar chart
+                    var ctx = document.getElementById("singelBar");
+                    if (ctx) {
+                      ctx.height = 150;
+                      var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: labels,
+                          datasets: [
+                            {
+                              label: "学生预约面试统计(次数)",
+                              data: data,
+                              borderColor: "rgba(255,10,251,0.5)",
+                              borderWidth: "0",
+                              backgroundColor: "rgba(255,10,251, 0.5)"
+                            }
+                          ]
+                        },
+                        options: {
+                          legend: {
+                            position: 'top',
+                            labels: {
+                              fontFamily: 'Poppins'
+                            }
+
+                          },
+                          scales: {
+                            xAxes: [{
+                              ticks: {
+                                fontFamily: "Poppins"
+
+                              }
+                            }],
+                            yAxes: [{
+                              ticks: {
+                                beginAtZero: true,
+                                fontFamily: "Poppins"
+                              }
+                            }]
+                          }
+                        }
+                      });
+                    }
+            }
+
            $(document).ready(function(){
-            var allcount=[[${successstat.allcount}]];
-               var successcount=[[${successstat.successcount}]];
-               var failedcount=allcount-successcount;
-            loadDataBySuccessRate(failedcount,successcount);
+                var allcount=[[${successstat.allcount}]];
+                   var successcount=[[${successstat.successcount}]];
+                   var failedcount=allcount-successcount;
+                loadDataBySuccessRate(failedcount,successcount);
+                
+
+                $.get("/index/getInterViewCount",function(result){
+
+                    if(result!=null){
+                        var dataX=[];
+                        var dataY=[];
+                        var count=0;
+                        for(var ee in result){
+                            dataX.push(result[ee].realname);
+                            dataY.push(result[ee].count);
+                            count=count+result[ee].count;
+                        }
+                        $("#interviewCount").text("预约总数: "+count+" 次");
+                    }
+                    loadInterViewCount(dataX,dataY);
+                });
+
+               
            });
        </script>
    </th:block>

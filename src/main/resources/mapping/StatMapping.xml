@@ -6,10 +6,10 @@
 
     </resultMap>
     <insert id="addStat">
-        insert into b_stat(phonenumber,companyname,post,interviewtime,interviewresult,requestinfo,ctime,area) values(#{phonenumber},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE(),#{area})
+        insert into b_stat(phonenumber,companyname,post,interviewtime,interviewresult,requestinfo,ctime,area,pay) values(#{phonenumber},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE(),#{area},#{pay})
     </insert>
     <update id="modifyStat">
-        update b_stat set phonenumber=#{phonenumber},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo},area=#{area} where id=#{id}
+        update b_stat set phonenumber=#{phonenumber},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo},area=#{area},pay=#{pay} where id=#{id}
     </update>
 
     <update id="pass">
@@ -37,7 +37,23 @@
         <if test="endtime != null and endtime != ''">
             and s.interviewtime &lt;= #{endtime}
         </if>
-        order by s.ctime desc;
+        order by s.ctime desc
+        <bind name="key_offset" value="currentpage*8"/>
+        <choose>
+            <when test="currentpage!=-1 and currentpage!=0">
+                LIMIT #{key_offset},8
+            </when>
+            <otherwise>
+                LIMIT 0,8
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getDataCount" resultType="int">
+        select CEIL(count(*)/8) from b_stat where 1=1
+        <if test="phonenumber != null and phonenumber != ''">
+            and phonenumber=#{phonenumber}
+        </if>
     </select>
 
     <select id="getOfferCount" resultType="int">
@@ -58,6 +74,10 @@
 
     <select id="getCalendarData" resultType="com.zy.microoffice.entity.CalendarEntity">
         select CONCAT(u.realname,' - ',s.companyname) as title,s.interviewtime as start,s.id as statid from b_stat s,s_user u where s.phonenumber=u.phonenumber
+    </select>
+
+    <select id="getUserInterViewCount" resultType="com.zy.microoffice.entity.InterViewCountEntity">
+        select u.realname,count(s.phonenumber) as count from b_stat s,s_user u where s.phonenumber=u.phonenumber GROUP BY s.phonenumber,u.realname
     </select>
 
 </mapper>

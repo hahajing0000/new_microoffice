@@ -11,6 +11,7 @@
     </insert>
 
     <select id="getChats" resultType="com.zy.microoffice.entity.ChatEntity">
+
         select * from b_chat where fromuser=#{from} or fromuser=#{to} and touser=#{from} or touser=#{to};
     </select>
 </mapper>

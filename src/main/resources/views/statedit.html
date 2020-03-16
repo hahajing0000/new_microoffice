@@ -57,6 +57,11 @@
                             <textarea id="requestinfo" th:text="${stat!=null}?${stat.requestinfo}" name="requestinfo" rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="pay" class="control-label mb-1">薪资</label>
+                            <input  id="pay" name="pay" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${pay!=null}?${stat.pay}" />
+                            <!--                            <font color="red" th:text="${post}"></font>-->
+                        </div>
+                        <div class="form-group">
                             <label for="interviewtime" class="control-label mb-1">面试时间</label>
                             <div class="input-append date" id="datetimepickerstart">
                                 <input id="interviewtime" name="interviewtime" size="16" th:value="${stat!=null}?${stat.interviewtime}" class="form-control" type="text" readonly />
