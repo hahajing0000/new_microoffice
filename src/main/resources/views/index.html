@@ -129,9 +129,48 @@
                         </div>
 
                         <div class="row" style="color: white;margin-bottom: 1rem;">
-                            <div class="col-lg-12 au-card au-card--bg-blue au-card-top-countries">
+                            <div class="col-lg-12 au-card au-card--bg-blue3 au-card-top-countries">
                                 <div class="au-card-inner">
                                     <div class="table-responsive">
+                                        <h2 style="color:white;margin-bottom:2rem;">今日面试</h2>
+
+                                        <table class="table table-top-countries">
+                                            <thead>
+                                            <tr>
+                                                <th>姓名</th>
+                                                <th>面试公司</th>
+                                                <th>职位</th>
+                                                <th>所在城市</th>
+                                                <th>面试时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <!--                                            <tr th:if="${list.size()} eq 0">-->
+                                            <!--                                                <td colspan="8">暂时还没有面试成功的数据！</td>-->
+                                            <!--                                            </tr>-->
+                                            <tr th:each="stat : ${toadylist}" class="tr-shadow">
+                                                <td th:text="${stat.realname}">张三</td>
+                                                <td>
+                                                    <span class="block-email" th:text="${stat.companyname}">XX公司</span>
+                                                </td>
+                                                <td class="desc" th:text="${stat.post}">Android开发</td>
+                                                <td class="desc" th:text="${stat.area}">北京</td>
+                                                <td th:text="${stat.interviewtime}">2018-09-27 02:12</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="color: white;margin-bottom: 1rem;">
+                            <div class="col-lg-12 au-card au-card--bg-red au-card-top-countries">
+                                <div class="au-card-inner">
+                                    <div class="table-responsive">
+                                        <h2 style="color:white;margin-bottom:2rem;">已下Offer</h2>
+
                                         <table class="table table-top-countries">
                                             <thead>
                                             <tr>

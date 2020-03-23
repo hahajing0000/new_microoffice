@@ -133,8 +133,8 @@ public class StatService {
      * 获取日历相关数据
      * @return
      */
-    public List<CalendarEntity> getCalendarData(){
-        return statMapper.getCalendarData();
+    public List<CalendarEntity> getCalendarData(String phonenumber){
+        return statMapper.getCalendarData(phonenumber);
     }
 
     /**
@@ -143,5 +143,13 @@ public class StatService {
      */
     public List<InterViewCountEntity> getUserInterViewCount(){
         return statMapper.getUserInterViewCount();
+    }
+
+    /**
+     * 获取今天面试信息
+     * @return
+     */
+    public List<StatEntity> getStatEntityToady(){
+        return statMapper.getStatEntityToady();
     }
 }

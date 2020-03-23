@@ -45,11 +45,17 @@ public class IndexController {
         if (statEntityBySuccess==null){
             statEntityBySuccess=new ArrayList<>();
         }
+        //今日面试人员信息
+        List<StatEntity> statEntityToady=statService.getStatEntityToady();
+        if (statEntityToady==null){
+            statEntityToady=new ArrayList<>();
+        }
 
         model.addAttribute("offercount", offerCount);
         model.addAttribute("todaycount", interViewCountToday);
         model.addAttribute("successrate", interViewSuccess);
         model.addAttribute("list", statEntityBySuccess);
+        model.addAttribute("toadylist", statEntityToady);
         model.addAttribute("successstat", suceessRate);
 //        List<String> keys=new ArrayList<>();
 //        List<Integer> values=new ArrayList<>();

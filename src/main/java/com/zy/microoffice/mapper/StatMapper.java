@@ -101,11 +101,17 @@ public interface StatMapper {
      * 获取日历相关数据
      * @return
      */
-    List<CalendarEntity> getCalendarData();
+    List<CalendarEntity> getCalendarData(String phonenumber);
 
     /**
      * 获取用户预约面试数量
      * @return
      */
     List<InterViewCountEntity> getUserInterViewCount();
+
+    /**
+     * 获取今日面试信息
+     * @return
+     */
+    List<StatEntity> getStatEntityToady();
 }

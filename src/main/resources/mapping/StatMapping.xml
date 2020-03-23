@@ -74,10 +74,17 @@
 
     <select id="getCalendarData" resultType="com.zy.microoffice.entity.CalendarEntity">
         select CONCAT(u.realname,' - ',s.companyname) as title,s.interviewtime as start,s.id as statid from b_stat s,s_user u where s.phonenumber=u.phonenumber
+        <if test="phonenumber != null and phonenumber != ''">
+            and s.phonenumber=#{phonenumber}
+        </if>
     </select>
 
     <select id="getUserInterViewCount" resultType="com.zy.microoffice.entity.InterViewCountEntity">
         select u.realname,count(s.phonenumber) as count from b_stat s,s_user u where s.phonenumber=u.phonenumber GROUP BY s.phonenumber,u.realname
+    </select>
+
+    <select id="getStatEntityToady" resultType="com.zy.microoffice.entity.StatEntity">
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and TO_DAYS(s.interviewtime) = TO_DAYS(now()) order by companyname
     </select>
 
 </mapper>

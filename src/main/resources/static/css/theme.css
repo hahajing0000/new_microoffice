@@ -3298,6 +3298,19 @@ section {
     background-image: -ms-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
 }
 
+.au-card--bg-red {
+    background-image: -moz-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
+   background-image: -webkit-linear-gradient(90deg, #dc3545 30%, #d32333 100%);
+    background-image: -ms-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
+}
+
+.au-card--bg-blue3 {
+    background-image: -moz-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
+    background-image: -webkit-linear-gradient(90deg, #01566a 0%, #075f6d 100%);
+    background-image: -ms-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
+}
+
+
 .au-card-top-countries {
     padding: 40px;
     padding-top: 25px;

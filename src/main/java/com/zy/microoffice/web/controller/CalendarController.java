@@ -1,5 +1,6 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.config.ConstValue;
 import com.zy.microoffice.entity.CalendarEntity;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.service.StatService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @ApiIgnore
@@ -30,8 +32,12 @@ public class CalendarController {
 
     @RequestMapping(value = "/loadData")
     @ResponseBody
-    public List<CalendarEntity>  loadData(){
-        List<CalendarEntity> calendarData = statService.getCalendarData();
+    public List<CalendarEntity>  loadData(HttpSession httpSession){
+        String phonenumber="";//(String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        if (phonenumber.toLowerCase().trim().equals("admin")){
+            phonenumber="";
+        }
+        List<CalendarEntity> calendarData = statService.getCalendarData(phonenumber);
         return calendarData;
     }
 
