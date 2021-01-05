@@ -20,38 +20,42 @@ public class ContactsService {
 
     /**
      * 添加联系人
-     * @param userid 用户id
+     *
+     * @param userid     用户id
      * @param contactsid 联系人id
      * @return
      */
-    public ResponseEntity addContacts(int userid, int contactsid){
-        return ResponseUtils.success(contactsMapper.addContacts(userid,contactsid));
+    public ResponseEntity addContacts(int userid, int contactsid) {
+        return ResponseUtils.success(contactsMapper.addContacts(userid, contactsid));
     }
 
     /**
      * 获取联系人
+     *
      * @param userid 用户id
      * @return
      */
-    public ResponseEntity<List<UserEntity>> getContacts(int userid){
+    public ResponseEntity<List<UserEntity>> getContacts(int userid) {
         return ResponseUtils.success(contactsMapper.getContacts(userid));
     }
 
     /**
      * 获取添加好友的申请
+     *
      * @param userid
      * @return
      */
-    public ResponseEntity<List<UserEntity>> getAddApply(int userid){
+    public ResponseEntity<List<UserEntity>> getAddApply(int userid) {
         return ResponseUtils.success(contactsMapper.getAddApply(userid));
     }
 
     /**
      * 同意申请
+     *
      * @param userid
      * @return
      */
-    public ResponseEntity<Boolean> agreeApply(int userid, int contactsid){
-        return ResponseUtils.success(contactsMapper.agreeApply(userid,contactsid));
+    public ResponseEntity<Boolean> agreeApply(int userid, int contactsid) {
+        return ResponseUtils.success(contactsMapper.agreeApply(userid, contactsid));
     }
 }

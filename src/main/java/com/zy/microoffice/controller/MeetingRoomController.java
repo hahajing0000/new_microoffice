@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/meetingroom")
-@Api(value = "会议室模块",description = "会议室模块",tags = "会议室模块")
+@Api(value = "会议室模块", description = "会议室模块", tags = "会议室模块")
 public class MeetingRoomController {
 
     @Autowired
@@ -21,33 +21,35 @@ public class MeetingRoomController {
 
     /**
      * 添加会议室
+     *
      * @param meetingRoomEntity 会议室请求实体
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "添加会议室",notes = "添加会议室",httpMethod = "POST")
+    @ApiOperation(value = "添加会议室", notes = "添加会议室", httpMethod = "POST")
     @PostMapping("addMeetingRoom")
     public ResponseEntity<Boolean> addMeetingRoom(@RequestBody
-                                                              @ApiParam(name = "meetingRoomEntity",value = "会议室请求实体",required = true)
-                                                              MeetingRoomEntity meetingRoomEntity){
+                                                  @ApiParam(name = "meetingRoomEntity", value = "会议室请求实体", required = true)
+                                                          MeetingRoomEntity meetingRoomEntity) {
         return meetingRoomService.addMeetingRoom(meetingRoomEntity);
     }
 
     /**
      * 删除会议室
-     * @param id 会议室id
+     *
+     * @param id      会议室id
      * @param creator 创建者id
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "删除会议室",notes = "删除会议室",httpMethod = "DELETE")
+    @ApiOperation(value = "删除会议室", notes = "删除会议室", httpMethod = "DELETE")
     @DeleteMapping("removeMeetingRoom")
     public ResponseEntity<Boolean> removeMeetingRoom(@RequestParam
-                                                                 @ApiParam(name = "id",value = "会议室id",required = true)
-                                                                 int id,
+                                                     @ApiParam(name = "id", value = "会议室id", required = true)
+                                                             int id,
                                                      @RequestParam
-                                                             @ApiParam(name = "creator",value = "创建者id",required = true)
-                                                     int creator){
-        return meetingRoomService.removeMeetingRoom(id,creator);
+                                                     @ApiParam(name = "creator", value = "创建者id", required = true)
+                                                             int creator) {
+        return meetingRoomService.removeMeetingRoom(id, creator);
     }
 }

@@ -4,7 +4,7 @@
 <head th:replace="base :: common_header(~{::title},~{::link})">
     <!-- Title Page-->
     <title>微办公系统</title>
-     <!-- Vendor CSS-->
+    <!-- Vendor CSS-->
     <link th:href="@{/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
     <link th:href="@{/vendor/wow/animate.css}" rel="stylesheet" media="all">
@@ -14,15 +14,15 @@
     <link th:href="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
 
     <!-- FullCalendar -->
-    <link th:href="@{/vendor/fullcalendar-3.10.0/fullcalendar.css}" rel='stylesheet' media="all" />
+    <link th:href="@{/vendor/fullcalendar-3.10.0/fullcalendar.css}" rel='stylesheet' media="all"/>
     <style type="text/css">
-    /* force class color to override the bootstrap base rule
-       NOTE: adding 'url: #' to calendar makes this unneeded
-     */
-    .fc-event, .fc-event:hover {
-          color: #fff !important;
-          text-decoration: none;
-    }
+        /* force class color to override the bootstrap base rule
+           NOTE: adding 'url: #' to calendar makes this unneeded
+         */
+        .fc-event, .fc-event:hover {
+            color: #fff !important;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -40,9 +40,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                      <div class="au-card">
-                        <div id="mCalendar"></div>
-                      </div>
+                        <div class="au-card">
+                            <div id="mCalendar"></div>
+                        </div>
                     </div><!-- .col -->
                 </div>
                 <div class="row">
@@ -59,7 +59,7 @@
 
 
 <th:block th:replace="javascript::scripts(~{::script})">
-  <!-- Vendor JS       -->
+    <!-- Vendor JS       -->
     <script th:src="@{/vendor/slick/slick.min.js}">
     </script>
     <script th:src="@{/vendor/wow/wow.min.js}"></script>
@@ -82,35 +82,35 @@
 
     <script type="text/javascript">
         var initialLocaleCode = 'zh-cn'; //中文
-        $(function() {
+        $(function () {
 
 
-          // setup a few events
-          $('#mCalendar').fullCalendar({
-            themeSystem: 'bootstrap3',
-            header: {
+            // setup a few events
+            $('#mCalendar').fullCalendar({
+                themeSystem: 'bootstrap3',
+                header: {
                     left: 'prev,next today myCustomButton',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-            locale: initialLocaleCode,
-            //displayEventTime: false,
-            displayEventEnd: true,
-            eventLimit: 3,
-            eventLimitText: '更多',
-            editable: true,
-            events:{
-                url:'/calendar/loadData',
-                color: 'orange',   // an option!
-                textColor: 'white'
-            },
-             eventClick: function(calEvent, jsEvent, view) {
-                    var id=calEvent.statid;
-                    window.location.href='/calendar/gotoStatDetail?id='+id;
+                locale: initialLocaleCode,
+                //displayEventTime: false,
+                displayEventEnd: true,
+                eventLimit: 3,
+                eventLimitText: '更多',
+                editable: true,
+                events: {
+                    url: '/calendar/loadData',
+                    color: 'orange',   // an option!
+                    textColor: 'white'
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    var id = calEvent.statid;
+                    window.location.href = '/calendar/gotoStatDetail?id=' + id;
                     return false;
                 }
 
-          });
+            });
         });
     </script>
 </th:block>

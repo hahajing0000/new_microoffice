@@ -3,24 +3,24 @@
 <mapper namespace="com.zy.microoffice.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.zy.microoffice.entity.UserEntity">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
-<!--        <result column="pwd" jdbcType="VARCHAR" property="pwd" />-->
-        <result column="realname" jdbcType="VARCHAR" property="realname" />
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber"/>
+        <!--        <result column="pwd" jdbcType="VARCHAR" property="pwd" />-->
+        <result column="realname" jdbcType="VARCHAR" property="realname"/>
         <result column="token" jdbcType="VARCHAR" property="token"/>
     </resultMap>
 
-<!--    <select id="AddUser" resultType="boolean">-->
-<!--        select * from s_user where id = #{id}-->
-<!--        -->
-<!--    </select>-->
+    <!--    <select id="AddUser" resultType="boolean">-->
+    <!--        select * from s_user where id = #{id}-->
+    <!--        -->
+    <!--    </select>-->
     <insert id="register" statementType="CALLABLE">
         {
-            call user_register(
-                #{pn,mode=IN,jdbcType=VARCHAR},
-                #{p,mode=IN,jdbcType=VARCHAR},
-                #{result,mode=OUT,jdbcType=VARCHAR}
-                )
+        call user_register(
+        #{pn,mode=IN,jdbcType=VARCHAR},
+        #{p,mode=IN,jdbcType=VARCHAR},
+        #{result,mode=OUT,jdbcType=VARCHAR}
+        )
         }
     </insert>
     <select id="getUserById" resultMap="BaseResultMap">

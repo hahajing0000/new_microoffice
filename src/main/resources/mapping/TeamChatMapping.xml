@@ -6,9 +6,10 @@
 
     </resultMap>
 
-   <insert id="sendMsg">
-       insert into b_team_chat(teamcode,fromuser,msgtype,content,ctime) values(#{teamcode},#{fromuser},#{msgtype},#{content},SYSDATE());
-   </insert>
+    <insert id="sendMsg">
+        insert into b_team_chat(teamcode,fromuser,msgtype,content,ctime)
+        values(#{teamcode},#{fromuser},#{msgtype},#{content},SYSDATE());
+    </insert>
 
     <select id="getMsgsFromTeamCode" resultType="com.zy.microoffice.entity.TeamChatEntity">
         select * from b_team_chat where teamcode=#{teamCode};

@@ -10,6 +10,7 @@ import java.util.List;
 public interface SucheduleMapper {
     /**
      * 添加日程
+     *
      * @param scheduleEntity 日程实体
      * @return
      */
@@ -17,6 +18,7 @@ public interface SucheduleMapper {
 
     /**
      * 修改日程
+     *
      * @param scheduleEntity 日程实体
      * @return
      */
@@ -24,6 +26,7 @@ public interface SucheduleMapper {
 
     /**
      * 删除日程
+     *
      * @param id 日程id
      * @return
      */
@@ -31,6 +34,7 @@ public interface SucheduleMapper {
 
     /**
      * 根据id获取日程
+     *
      * @param id 日程id
      * @return
      */
@@ -38,6 +42,7 @@ public interface SucheduleMapper {
 
     /**
      * 获取创建/加入的日程
+     *
      * @param userid 用户id
      * @return
      */
@@ -45,22 +50,25 @@ public interface SucheduleMapper {
 
     /**
      * 参与会议日程
+     *
      * @param scheduleidid 日程id
-     * @param userid 用户id
+     * @param userid       用户id
      * @return
      */
-    boolean addParticipant(int scheduleidid,int userid);
+    boolean addParticipant(int scheduleidid, int userid);
 
     /**
      * 退出会议日程
+     *
      * @param scheduleidid 日程id
-     * @param userid 用户id
+     * @param userid       用户id
      * @return
      */
-    boolean removeParticipant(int scheduleidid,int userid);
+    boolean removeParticipant(int scheduleidid, int userid);
 
     /**
      * 获取会议日程的所有人员
+     *
      * @param scheduleidid 日程id
      * @return
      */

@@ -22,17 +22,17 @@ public class IndexController {
     StatService statService;
 
     @RequestMapping("/stat")
-    public String gotoStat(){
+    public String gotoStat() {
         return "redirect:/stat/findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping("/calendar")
-    public String gotoCalendar(){
+    public String gotoCalendar() {
         return "redirect:/calendar/getdata";
     }
 
     @RequestMapping("/index")
-    public String gotoIndex(Model model){
+    public String gotoIndex(Model model) {
         //有Offer人数
         int offerCount = statService.getOfferCount();
         //今日面试人数
@@ -42,13 +42,13 @@ public class IndexController {
         HashMap<String, Integer> suceessRate = statService.getSuceessRate();
         //有Offer人员信息
         List<StatEntity> statEntityBySuccess = statService.getStatEntityBySuccess();
-        if (statEntityBySuccess==null){
-            statEntityBySuccess=new ArrayList<>();
+        if (statEntityBySuccess == null) {
+            statEntityBySuccess = new ArrayList<>();
         }
         //今日面试人员信息
-        List<StatEntity> statEntityToady=statService.getStatEntityToady();
-        if (statEntityToady==null){
-            statEntityToady=new ArrayList<>();
+        List<StatEntity> statEntityToady = statService.getStatEntityToady();
+        if (statEntityToady == null) {
+            statEntityToady = new ArrayList<>();
         }
 
         model.addAttribute("offercount", offerCount);
@@ -71,7 +71,7 @@ public class IndexController {
 
     @RequestMapping(value = "/getInterViewCount")
     @ResponseBody
-    public List<InterViewCountEntity> getInterViewCount(){
+    public List<InterViewCountEntity> getInterViewCount() {
         List<InterViewCountEntity> userInterViewCount = statService.getUserInterViewCount();
         return userInterViewCount;
     }

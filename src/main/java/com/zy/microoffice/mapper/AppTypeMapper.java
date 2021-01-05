@@ -9,6 +9,7 @@ import java.util.List;
 public interface AppTypeMapper {
     /**
      * 获取所有应用类别
+     *
      * @return
      */
     List<AppTypeEntity> getAppTypes();

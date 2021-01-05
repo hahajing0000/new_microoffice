@@ -17,9 +17,10 @@ public class AppTypeService {
 
     /**
      * 获取所有应用类别
+     *
      * @return
      */
-    public ResponseEntity<List<AppTypeEntity>> getAppTypes(){
+    public ResponseEntity<List<AppTypeEntity>> getAppTypes() {
         return ResponseUtils.success(appTypeMapper.getAppTypes());
     }
 }

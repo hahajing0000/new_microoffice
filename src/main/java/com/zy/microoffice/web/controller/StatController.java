@@ -23,86 +23,88 @@ public class StatController {
     StatService statService;
 
     @RequestMapping("/")
-    public String init(Model model){
-        List<StatEntity> stats = statService.getStats("","", "",-1);
-        model.addAttribute("list",stats);
+    public String init(Model model) {
+        List<StatEntity> stats = statService.getStats("", "", "", -1);
+        model.addAttribute("list", stats);
         return "stat";
     }
 
     @RequestMapping(value = "/findstats")
-    public String FindStat(Model model,String starttime,String endtime,int page,HttpSession httpSession){
+    public String FindStat(Model model, String starttime, String endtime, int page, HttpSession httpSession) {
 //        if (starttime==null){starttime="";}
 //        if(endtime==null){endtime="";}
-        String phonenumber= (String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
-        if (phonenumber.toLowerCase().trim().equals("admin")){
-            phonenumber="";
+        String phonenumber = (String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        if (phonenumber.toLowerCase().trim().equals("admin")) {
+            phonenumber = "";
         }
-        List<StatEntity> stats = statService.getStats(phonenumber,starttime, endtime,page);
-        model.addAttribute("list",stats);
+        List<StatEntity> stats = statService.getStats(phonenumber, starttime, endtime, page);
+        model.addAttribute("list", stats);
         int dataCount = statService.getDataCount(phonenumber);
         model.addAttribute("datacount", dataCount);
         return "stat";
     }
 
     @RequestMapping("/toAdd")
-    public String toAdd(){
+    public String toAdd() {
         return "statedit";
     }
 
     @RequestMapping("/toEdit")
-    public String toEdit(int id,Model model){
+    public String toEdit(int id, Model model) {
         StatEntity stat = statService.getStatById(id);
         model.addAttribute("stat", stat);
         return "statedit";
     }
 
     @PostMapping(value = "/insert")
-    public String insert(StatEntity statEntity,BindingResult bindingResult, HttpSession session){
+    public String insert(StatEntity statEntity, BindingResult bindingResult, HttpSession session) {
         //从Session中获取PhoneNumber
-        String phonenumber= (String) session.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        String phonenumber = (String) session.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
         statEntity.setPhonenumber(phonenumber);
         statService.addStat(statEntity);
         return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @PostMapping(value = "/modify")
-    public String modify(StatEntity statEntity,BindingResult bindingResult){
+    public String modify(StatEntity statEntity, BindingResult bindingResult) {
         statService.modifyStat(statEntity);
         return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     /**
      * 通过面试
+     *
      * @param id
      * @return
      */
     @PostMapping(value = "/pass")
-    public String pass(int id){
-         statService.pass(id);
-         return "redirect:findstats?starttime=&endtime=&page=-1";
+    public String pass(int id) {
+        statService.pass(id);
+        return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     /**
      * 面试失败
+     *
      * @param id
      * @return
      */
     @PostMapping(value = "/failed")
-    public String failed(int id){
+    public String failed(int id) {
         statService.failed(id);
         return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping(value = "/delete")
-    public String delete(int id){
+    public String delete(int id) {
         statService.remove(id);
         return "redirect:findstats?starttime=&endtime=&page=-1";
     }
 
     @RequestMapping(value = "/getId")
-    public String getId(Model model,int id){
+    public String getId(Model model, int id) {
         StatEntity statById = statService.getStatById(id);
-        model.addAttribute("stat",statById);
+        model.addAttribute("stat", statById);
         return "statedit";
     }
 }

@@ -25,24 +25,24 @@ public class CalendarController {
     StatService statService;
 
     @RequestMapping(value = "/getdata")
-    public String getData(Model model){
+    public String getData(Model model) {
 
         return "calendar";
     }
 
     @RequestMapping(value = "/loadData")
     @ResponseBody
-    public List<CalendarEntity>  loadData(HttpSession httpSession){
-        String phonenumber="";//(String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
-        if (phonenumber.toLowerCase().trim().equals("admin")){
-            phonenumber="";
+    public List<CalendarEntity> loadData(HttpSession httpSession) {
+        String phonenumber = "";//(String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        if (phonenumber.toLowerCase().trim().equals("admin")) {
+            phonenumber = "";
         }
         List<CalendarEntity> calendarData = statService.getCalendarData(phonenumber);
         return calendarData;
     }
 
     @RequestMapping(value = "/gotoStatDetail")
-    public String gotoStatDetail(int id,Model model){
+    public String gotoStatDetail(int id, Model model) {
         StatEntity stat = statService.getStatById(id);
         model.addAttribute("stat", stat);
         model.addAttribute("flag", "calendar");

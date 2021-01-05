@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication()
 public class MicroofficeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MicroofficeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MicroofficeApplication.class, args);
+    }
 
 }

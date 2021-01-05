@@ -11,15 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object user = request.getSession().getAttribute("phonenumber");
-        System.out.println("preHandle----" + user + " ::: " + request.getRequestURL());
-        if (user == null) {
-            request.setAttribute("msg","无权限请先登录");
-            // 获取request返回页面到登录页
-            //request.getRequestDispatcher("/login.html").forward(request, response);
-            response.sendRedirect("/");
-            return false;
+        String requestURL = request.getRequestURL().toString();
+        if (requestURL.contains("/index/") || requestURL.contains("/calendar/") || requestURL.contains("/stat/")) {
+            Object user = request.getSession().getAttribute("phonenumber");
+            System.out.println("preHandle----" + user + " ::: " + request.getRequestURL());
+            if (user == null) {
+                request.setAttribute("msg", "无权限请先登录");
+                // 获取request返回页面到登录页
+                //request.getRequestDispatcher("/login.html").forward(request, response);
+                response.sendRedirect("/");
+                return false;
+            }
         }
+
 
         return true;
     }

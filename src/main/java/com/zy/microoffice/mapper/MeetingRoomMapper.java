@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface MeetingRoomMapper {
     /**
      * 添加会议室
+     *
      * @param meetingRoomEntity 会议室请求实体
      * @return
      */
@@ -14,9 +15,10 @@ public interface MeetingRoomMapper {
 
     /**
      * 删除会议室
-     * @param id 会议室id
+     *
+     * @param id      会议室id
      * @param creator 创建者id
      * @return
      */
-    boolean removeMeetingRoom(int id,int creator);
+    boolean removeMeetingRoom(int id, int creator);
 }

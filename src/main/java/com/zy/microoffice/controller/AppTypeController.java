@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(value = "应用类型模块",description = "应用类型模块",tags = "应用类型模块")
+@Api(value = "应用类型模块", description = "应用类型模块", tags = "应用类型模块")
 @RestController
 @RequestMapping("/apptype")
 public class AppTypeController {
@@ -23,12 +23,13 @@ public class AppTypeController {
 
     /**
      * 获取所有应用类别
+     *
      * @return
      */
     @UserLoginToken
-    @ApiOperation(value = "获取应用类型",notes = "获取应用类型",httpMethod = "GET")
+    @ApiOperation(value = "获取应用类型", notes = "获取应用类型", httpMethod = "GET")
     @GetMapping("/getAppTypes")
-    public ResponseEntity<List<AppTypeEntity>> getAppTypes(){
+    public ResponseEntity<List<AppTypeEntity>> getAppTypes() {
         return appTypeService.getAppTypes();
     }
 }

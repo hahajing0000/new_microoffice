@@ -18,138 +18,154 @@ public class StatService {
 
     /**
      * 添加面试信息
+     *
      * @param statEntity
      * @return
      */
-    public boolean addStat(StatEntity statEntity){
+    public boolean addStat(StatEntity statEntity) {
         return statMapper.addStat(statEntity);
     }
 
     /**
      * 修改面试信息
+     *
      * @param statEntity
      * @return
      */
-    public boolean modifyStat(StatEntity statEntity){
+    public boolean modifyStat(StatEntity statEntity) {
         return statMapper.modifyStat(statEntity);
     }
 
     /**
      * 通过面试
+     *
      * @param id
      * @return
      */
-    public boolean pass(int id){
+    public boolean pass(int id) {
         return statMapper.pass(id);
     }
 
     /**
      * 面试失败
+     *
      * @param id
      * @return
      */
-    public boolean failed(int id){
+    public boolean failed(int id) {
         return statMapper.failed(id);
     }
 
     /**
      * 删除面试信息
+     *
      * @param id
      * @return
      */
-    public boolean remove(int id){
+    public boolean remove(int id) {
         return statMapper.remove(id);
     }
 
     /**
      * 通过id获取面试信息
+     *
      * @param id
      * @return
      */
-    public StatEntity getStatById(int id){
+    public StatEntity getStatById(int id) {
         return statMapper.getStatById(id);
     }
 
     /**
      * 根据添加获取面试信息
+     *
      * @param starttime
      * @param endtime
      * @return
      */
-    public List<StatEntity> getStats(String phonenumber,String starttime, String endtime,int page){
-        return statMapper.getStats(phonenumber,starttime,endtime,page);
+    public List<StatEntity> getStats(String phonenumber, String starttime, String endtime, int page) {
+        return statMapper.getStats(phonenumber, starttime, endtime, page);
     }
 
     /**
      * 根据手机号码获取数据页数
+     *
      * @param phonenumber
      * @return
      */
-    public int getDataCount(String phonenumber){
+    public int getDataCount(String phonenumber) {
         return statMapper.getDataCount(phonenumber);
     }
 
     /**
      * 获取有Offer的人数
+     *
      * @return
      */
-    public int getOfferCount(){
+    public int getOfferCount() {
         return statMapper.getOfferCount();
     }
 
     /**
      * 获取今天面试人数
+     *
      * @return
      */
-    public int getInterViewCountToday(){
+    public int getInterViewCountToday() {
         return statMapper.getInterViewCountToday();
     }
 
     /**
      * 获取面试成功率
+     *
      * @return
      */
-    public double getInterViewSuccess(){
+    public double getInterViewSuccess() {
         return statMapper.getInterViewSuccess();
     }
 
     /**
      * 获取已经下Offer的面试信息
+     *
      * @return
      */
-    public List<StatEntity> getStatEntityBySuccess(){
+    public List<StatEntity> getStatEntityBySuccess() {
         return statMapper.getStatEntityBySuccess();
     }
 
     /**
      * 获取面试成功统计数据
+     *
      * @return
      */
-    public HashMap<String,Integer> getSuceessRate(){
+    public HashMap<String, Integer> getSuceessRate() {
         return statMapper.getSuceessRate();
     }
 
     /**
      * 获取日历相关数据
+     *
      * @return
      */
-    public List<CalendarEntity> getCalendarData(String phonenumber){
+    public List<CalendarEntity> getCalendarData(String phonenumber) {
         return statMapper.getCalendarData(phonenumber);
     }
 
     /**
      * 获取用户预约面试数量
+     *
      * @return
      */
-    public List<InterViewCountEntity> getUserInterViewCount(){
+    public List<InterViewCountEntity> getUserInterViewCount() {
         return statMapper.getUserInterViewCount();
     }
 
     /**
      * 获取今天面试信息
+     *
      * @return
      */
-    public List<StatEntity> getStatEntityToady(){
+    public List<StatEntity> getStatEntityToady() {
         return statMapper.getStatEntityToady();
     }
 }

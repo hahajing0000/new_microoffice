@@ -21,7 +21,8 @@ import static com.google.common.collect.Lists.newArrayList;
 @EnableSwagger2
 @EnableSwaggerBootstrapUI
 public class Swagger2 {
-    private final String KEY="token";
+    private final String KEY = "token";
+
     /**
      * 通过 createRestApi函数来构建一个DocketBean
      * 函数名,可以随意命名,喜欢什么命名就什么命名
@@ -47,6 +48,7 @@ public class Swagger2 {
         return newArrayList(
                 new ApiKey(KEY, KEY, "header"));
     }
+
     private List<SecurityContext> securityContexts() {
         return newArrayList(
                 SecurityContext.builder()
@@ -55,6 +57,7 @@ public class Swagger2 {
                         .build()
         );
     }
+
     List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
@@ -70,7 +73,7 @@ public class Swagger2 {
                 .title("微办公 RESTful API")
                 //条款地址
                 .termsOfServiceUrl("http://despairyoke.github.io/")
-                .contact(new Contact("Zhangyue","http://www.zydeveloper.com/","444511958@qq.com"))
+                .contact(new Contact("Zhangyue", "http://www.zydeveloper.com/", "444511958@qq.com"))
                 .version("1.2")
                 //描述
                 .description("微办公 APP 项目API")

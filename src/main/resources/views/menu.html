@@ -4,7 +4,7 @@
 <aside class="menu-sidebar d-none d-lg-block" th:fragment="systemmenu(activeUri)">
     <div class="logo">
         <a href="#">
-            <img th:src="@{/images/icon/logo.png}" alt="Cool Admin" />
+            <img th:src="@{/images/icon/logo.png}" alt="Cool Admin"/>
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -21,7 +21,7 @@
                 </li>
                 <li th:class="${activeUri=='stat'}?'active has-sub':'has-sub'">
                     <a class="js-arrow" th:href="@{/index/stat}">
-                            <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</a>
+                        <i class="fas fa-chart-bar"></i>[[#{index.menu_stat}]]</a>
                 </li>
             </ul>
         </nav>

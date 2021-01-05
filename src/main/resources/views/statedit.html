@@ -24,20 +24,23 @@
                     面试信息录入
                 </div>
                 <div class="card-body">
-<!--                    th:action="@{/stat/insert}"-->
-                    <form id="form" action="#"  method="post" novalidate="novalidate">
-                        <input type="hidden" id="id" name="id" th:value="${stat!=null}?${stat.id}" />
-                        <input type="hidden" name="phonenumber" th:value="${stat!=null}?${stat.phonenumber}" />
+                    <!--                    th:action="@{/stat/insert}"-->
+                    <form id="form" action="#" method="post" novalidate="novalidate">
+                        <input type="hidden" id="id" name="id" th:value="${stat!=null}?${stat.id}"/>
+                        <input type="hidden" name="phonenumber" th:value="${stat!=null}?${stat.phonenumber}"/>
 
                         <div class="form-group">
                             <label for="companyname" class="control-label mb-1">公司名称</label>
-                            <input  id="companyname" name="companyname" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${stat ne null}?${stat.companyname}" />
-<!--                            <font color="red" th:text="${companyname}"></font>-->
+                            <input id="companyname" name="companyname" type="text" class="form-control"
+                                   aria-required="true" aria-invalid="false"
+                                   th:value="${stat ne null}?${stat.companyname}"/>
+                            <!--                            <font color="red" th:text="${companyname}"></font>-->
                         </div>
                         <div class="form-group">
                             <label for="post" class="control-label mb-1">职位名称</label>
-                            <input  id="post" name="post" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${stat!=null}?${stat.post}" />
-<!--                            <font color="red" th:text="${post}"></font>-->
+                            <input id="post" name="post" type="text" class="form-control" aria-required="true"
+                                   aria-invalid="false" th:value="${stat!=null}?${stat.post}"/>
+                            <!--                            <font color="red" th:text="${post}"></font>-->
                         </div>
                         <div class="form-group">
                             <label for="area" class="control-label mb-1">所在城市</label>
@@ -51,24 +54,30 @@
                                 <option th:selected="${stat!=null}?${stat.area == '天津'}" value="天津">天津</option>
                                 <option th:selected="${stat!=null}?${stat.area == '广州'}" value="广州">广州</option>
                                 <option th:selected="${stat!=null}?${stat.area == '西安'}" value="西安">西安</option>
+                                <option th:selected="${stat!=null}?${stat.area == '成都'}" value="成都">成都</option>
+                                <option th:selected="${stat!=null}?${stat.area == '苏州'}" value="苏州">苏州</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="requestinfo" class="control-label mb-1">职位需求</label>
-                            <textarea id="requestinfo" th:text="${stat!=null}?${stat.requestinfo}" name="requestinfo" rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
+                            <textarea id="requestinfo" th:text="${stat!=null}?${stat.requestinfo}" name="requestinfo"
+                                      rows="9" placeholder="请输入职位需求..." class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="pay" class="control-label mb-1">薪资</label>
-                            <input  id="pay" name="pay" type="text" class="form-control" aria-required="true" aria-invalid="false" th:value="${pay!=null}?${stat.pay}" />
+                            <input id="pay" name="pay" type="text" class="form-control" aria-required="true"
+                                   aria-invalid="false" th:value="${pay!=null}?${stat.pay}"/>
                             <!--                            <font color="red" th:text="${post}"></font>-->
                         </div>
                         <div class="form-group">
                             <label for="interviewtime" class="control-label mb-1">面试时间</label>
                             <div class="input-append date" id="datetimepickerstart">
-                                <input id="interviewtime" name="interviewtime" size="16" th:value="${stat!=null}?${stat.interviewtime}" class="form-control" type="text" readonly />
+                                <input id="interviewtime" name="interviewtime" size="16"
+                                       th:value="${stat!=null}?${stat.interviewtime}" class="form-control" type="text"
+                                       readonly/>
                                 <span class="add-on"><i class="icon-th"></i></span>
                             </div>
-<!--                            <font color="red" th:text="${interviewtime}"></font>-->
+                            <!--                            <font color="red" th:text="${interviewtime}"></font>-->
                         </div>
                         <div th:if="${flag}==null">
                             <button id="btn_save" class="btn btn-lg btn-info btn-block">
@@ -92,11 +101,11 @@
     <script th:src="@{/datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
     <script th:src="@{/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
     <script type="text/javascript">
-         $(function () {
+        $(function () {
             $('#datetimepickerstart').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii',
                 'setDate': new Date(),
-                language:"zh-CN",
+                language: "zh-CN",
                 weekStart: 1,
                 todayBtn: false,
                 autoclose: true,
@@ -104,38 +113,37 @@
                 pickerPosition: 'top-right',
             });
 
-            $("#btn_back").click(function(){
+            $("#btn_back").click(function () {
                 window.history.back();
             });
 
-            $("#btn_save").click(function(){
-                var companyname=$("#companyname").val();
-                var post=$("#post").val();
-                var requestinfo=$("#requestinfo").val();
-                var interviewtime=$("#interviewtime").val();
-                var area=$("#area").val();
-                if(isNull(companyname)){
+            $("#btn_save").click(function () {
+                var companyname = $("#companyname").val();
+                var post = $("#post").val();
+                var requestinfo = $("#requestinfo").val();
+                var interviewtime = $("#interviewtime").val();
+                var area = $("#area").val();
+                if (isNull(companyname)) {
                     showMsg("请输入公司名称");
                     return false;
                 }
-                if(isNull(post)){
+                if (isNull(post)) {
                     showMsg("请输入职位");
                     return false;
                 }
-                if(isNull(interviewtime)){
+                if (isNull(interviewtime)) {
                     showMsg("请输入面试时间");
                     return false;
                 }
-                if(area=="-1"){
+                if (area == "-1") {
                     showMsg("请选择所在城市");
                     return false;
                 }
-                var id= $("#id").val();
-                if(isNull(id)){
-                    $("#form").attr("action","/stat/insert").submit();
-                }
-                else{
-                    $("#form").attr("action","/stat/modify").submit();
+                var id = $("#id").val();
+                if (isNull(id)) {
+                    $("#form").attr("action", "/stat/insert").submit();
+                } else {
+                    $("#form").attr("action", "/stat/modify").submit();
                 }
 
             });

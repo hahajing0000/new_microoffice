@@ -56,4 +56,84 @@ public class StatEntity {
      * 薪资
      */
     private String pay;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getInterviewtime() {
+        return interviewtime;
+    }
+
+    public void setInterviewtime(String interviewtime) {
+        this.interviewtime = interviewtime;
+    }
+
+    public int getInterviewresult() {
+        return interviewresult;
+    }
+
+    public void setInterviewresult(int interviewresult) {
+        this.interviewresult = interviewresult;
+    }
+
+    public String getRequestinfo() {
+        return requestinfo;
+    }
+
+    public void setRequestinfo(String requestinfo) {
+        this.requestinfo = requestinfo;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getPay() {
+        return pay;
+    }
+
+    public void setPay(String pay) {
+        this.pay = pay;
+    }
 }

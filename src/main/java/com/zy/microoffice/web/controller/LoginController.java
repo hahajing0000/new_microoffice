@@ -22,23 +22,22 @@ public class LoginController {
     UserService userService;
 
     @RequestMapping("/")
-    public String index(ModelMap map){
-        map.put("mymsg","hi,i am zhangyue");
+    public String index(ModelMap map) {
+        map.put("mymsg", "hi,i am zhangyue");
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("phonenumber")String phonenumber, @RequestParam("pwd")String pwd, HttpSession httpSession, Model model){
+    public String login(@RequestParam("phonenumber") String phonenumber, @RequestParam("pwd") String pwd, HttpSession httpSession, Model model) {
 
         UserEntity login = userService.login(phonenumber, pwd);
-        if (login!=null){
+        if (login != null) {
             //用户登录后将PhoneBumber存入到Session中
             httpSession.setAttribute(ConstValue.USER_PHONENUMBER_KEY, phonenumber);
             return "redirect:index/index";
-        }
-        else{
+        } else {
             httpSession.invalidate();
-            model.addAttribute("error","用户名或者密码不存在");
+            model.addAttribute("error", "用户名或者密码不存在");
         }
         return "login";
     }

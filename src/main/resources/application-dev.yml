@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   messages:
     basename: static/i18n/messages
-    
+
   thymeleaf:
     cache: false
     prefix: classpath:/views/

@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel(value = "基础响应实体",description = "基础响应实体")
+@ApiModel(value = "基础响应实体", description = "基础响应实体")
 @Data
 public class ResponseEntity<T> {
     @ApiModelProperty(value = "结果码")

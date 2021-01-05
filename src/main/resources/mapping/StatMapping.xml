@@ -6,10 +6,14 @@
 
     </resultMap>
     <insert id="addStat">
-        insert into b_stat(phonenumber,companyname,post,interviewtime,interviewresult,requestinfo,ctime,area,pay) values(#{phonenumber},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE(),#{area},#{pay})
+        insert into
+        b_stat(phonenumber,companyname,post,interviewtime,interviewresult,requestinfo,ctime,area,pay,isvalid)
+        values(#{phonenumber},#{companyname},#{post},#{interviewtime},0,#{requestinfo},SYSDATE(),#{area},#{pay},1)
     </insert>
     <update id="modifyStat">
-        update b_stat set phonenumber=#{phonenumber},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo},area=#{area},pay=#{pay} where id=#{id}
+        update b_stat set
+        phonenumber=#{phonenumber},companyname=#{companyname},post=#{post},interviewtime=#{interviewtime},requestinfo=#{requestinfo},area=#{area},pay=#{pay}
+        where id=#{id}
     </update>
 
     <update id="pass">
@@ -27,7 +31,7 @@
         select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.id=#{id};
     </select>
     <select id="getStats" parameterType="String" resultType="com.zy.microoffice.entity.StatEntity">
-        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.isvalid>0
         <if test="phonenumber != null and phonenumber != ''">
             and s.phonenumber=#{phonenumber}
         </if>
@@ -50,41 +54,50 @@
     </select>
 
     <select id="getDataCount" resultType="int">
-        select CEIL(count(*)/8) from b_stat where 1=1
+        select CEIL(count(*)/8) from b_stat where 1=1 and isvalid>0
         <if test="phonenumber != null and phonenumber != ''">
             and phonenumber=#{phonenumber}
         </if>
     </select>
 
     <select id="getOfferCount" resultType="int">
-        select count(*) from (select count(phonenumber)  from b_stat GROUP BY phonenumber,interviewresult HAVING interviewresult=1) t
+        select count(*) from (select count(phonenumber) from b_stat GROUP BY phonenumber,interviewresult,isvalid HAVING
+        interviewresult=1 and isvalid>0) t
     </select>
     <select id="getInterViewCountToday" resultType="int">
-        select count(DISTINCT phonenumber) from b_stat where TO_DAYS(interviewtime) = TO_DAYS(now())
+        select count(DISTINCT phonenumber) from b_stat where TO_DAYS(interviewtime) = TO_DAYS(now()) and isvalid>0
     </select>
     <select id="getInterViewSuccess" resultType="int">
-        select FORMAT((select count(*) from b_stat where interviewresult=1)/(select count(*) from b_stat),2)*100 AS R
+        select FORMAT((select count(*) from b_stat where isvalid>0 and interviewresult=1)/(select count(*) from
+        b_stat),2)*100 AS R
     </select>
     <select id="getStatEntityBySuccess" resultType="com.zy.microoffice.entity.StatEntity">
-        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.interviewresult=1
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.interviewresult=1 and
+        s.isvalid>0 order by
+        realname
     </select>
     <select id="getSuceessRate" resultType="java.util.HashMap">
-        select (select count(DISTINCT phonenumber) as a from b_stat) as allcount,(select count(DISTINCT phonenumber) from b_stat where interviewresult=1) as successcount
+        select (select count(DISTINCT phonenumber) as a from b_stat) as allcount,(select count(DISTINCT phonenumber)
+        from b_stat where isvalid>0 and interviewresult=1) as successcount
     </select>
 
     <select id="getCalendarData" resultType="com.zy.microoffice.entity.CalendarEntity">
-        select CONCAT(u.realname,' - ',s.companyname) as title,s.interviewtime as start,s.id as statid from b_stat s,s_user u where s.phonenumber=u.phonenumber
+        select CONCAT(u.realname,' - ',s.companyname) as title,s.interviewtime as start,s.id as statid from b_stat
+        s,s_user u where s.phonenumber=u.phonenumber and s.isvalid>0
         <if test="phonenumber != null and phonenumber != ''">
             and s.phonenumber=#{phonenumber}
         </if>
     </select>
 
     <select id="getUserInterViewCount" resultType="com.zy.microoffice.entity.InterViewCountEntity">
-        select u.realname,count(s.phonenumber) as count from b_stat s,s_user u where s.phonenumber=u.phonenumber GROUP BY s.phonenumber,u.realname
+        select u.realname,count(s.phonenumber) as count from b_stat s,s_user u where s.isvalid>0 and
+        s.phonenumber=u.phonenumber GROUP
+        BY s.phonenumber,u.realname
     </select>
 
     <select id="getStatEntityToady" resultType="com.zy.microoffice.entity.StatEntity">
-        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and TO_DAYS(s.interviewtime) = TO_DAYS(now()) order by companyname
+        select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and TO_DAYS(s.interviewtime) =
+        TO_DAYS(now()) and s.isvalid>0 order by companyname
     </select>
 
 </mapper>

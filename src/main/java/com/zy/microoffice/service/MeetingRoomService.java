@@ -16,20 +16,22 @@ public class MeetingRoomService {
 
     /**
      * 添加会议室
+     *
      * @param meetingRoomEntity 会议室请求实体
      * @return
      */
-    public ResponseEntity<Boolean> addMeetingRoom(MeetingRoomEntity meetingRoomEntity){
+    public ResponseEntity<Boolean> addMeetingRoom(MeetingRoomEntity meetingRoomEntity) {
         return ResponseUtils.success(meetingRoomMapper.addMeetingRoom(meetingRoomEntity));
     }
 
     /**
      * 删除会议室
-     * @param id 会议室id
+     *
+     * @param id      会议室id
      * @param creator 创建者id
      * @return
      */
-    public ResponseEntity<Boolean> removeMeetingRoom(int id, int creator){
-        return ResponseUtils.success(meetingRoomMapper.removeMeetingRoom(id,creator));
+    public ResponseEntity<Boolean> removeMeetingRoom(int id, int creator) {
+        return ResponseUtils.success(meetingRoomMapper.removeMeetingRoom(id, creator));
     }
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.beans.Transient;
 
 @Data
-@ApiModel(value = "用户信息" ,description = "用户信息")
+@ApiModel(value = "用户信息", description = "用户信息")
 public class UserEntity {
 
     @ApiModelProperty(value = "用户id")
@@ -22,6 +22,54 @@ public class UserEntity {
     private String token;
     @ApiModelProperty(value = "头像")
     private String headimg;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getHeadimg() {
+        return headimg;
+    }
+
+    public void setHeadimg(String headimg) {
+        this.headimg = headimg;
+    }
 
     @Override
     public String toString() {

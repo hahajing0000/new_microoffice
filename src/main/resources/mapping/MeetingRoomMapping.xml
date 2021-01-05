@@ -7,7 +7,8 @@
     </resultMap>
 
     <insert id="addMeetingRoom">
-        insert into b_meetingroom(meetingroomname,teamcode,creator,ctime) values(#{meetingroomname},#{teamcode},#{creator},SYSDATE());
+        insert into b_meetingroom(meetingroomname,teamcode,creator,ctime)
+        values(#{meetingroomname},#{teamcode},#{creator},SYSDATE());
     </insert>
     <delete id="removeMeetingRoom">
         delete from b_meetingroom where id=#{id} and creator=#{creator};

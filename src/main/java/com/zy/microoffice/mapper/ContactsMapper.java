@@ -9,14 +9,16 @@ import java.util.List;
 public interface ContactsMapper {
     /**
      * 添加联系人
-     * @param userid 用户id
+     *
+     * @param userid     用户id
      * @param contactsid 联系人id
      * @return
      */
-    boolean addContacts(int userid,int contactsid);
+    boolean addContacts(int userid, int contactsid);
 
     /**
      * 获取联系人
+     *
      * @param userid 用户id
      * @return
      */
@@ -24,6 +26,7 @@ public interface ContactsMapper {
 
     /**
      * 获取添加好友的申请
+     *
      * @param userid
      * @return
      */
@@ -31,8 +34,9 @@ public interface ContactsMapper {
 
     /**
      * 同意申请
+     *
      * @param userid
      * @return
      */
-    boolean agreeApply(int userid,int contactsid);
+    boolean agreeApply(int userid, int contactsid);
 }

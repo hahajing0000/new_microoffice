@@ -19,20 +19,22 @@ public class ChatService {
 
     /**
      * 添加聊天实体
+     *
      * @param chatEntity 聊天实体对象
      * @return
      */
-    public ResponseEntity addChat(ChatEntity chatEntity){
+    public ResponseEntity addChat(ChatEntity chatEntity) {
         return ResponseUtils.success(chatMapper.addChat(chatEntity));
     }
 
     /**
      * 获取聊天内容
+     *
      * @param from 发送人
      * @param to   接收人
      * @return
      */
-    public ResponseEntity<List<ChatEntity>> getChats(int from, int to){
-        return ResponseUtils.success(chatMapper.getChats(from,to));
+    public ResponseEntity<List<ChatEntity>> getChats(int from, int to) {
+        return ResponseUtils.success(chatMapper.getChats(from, to));
     }
 }

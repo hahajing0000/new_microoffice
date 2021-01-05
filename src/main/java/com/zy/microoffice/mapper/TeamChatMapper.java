@@ -9,6 +9,7 @@ import java.util.List;
 public interface TeamChatMapper {
     /**
      * 发送消息
+     *
      * @param teamChatEntity 消息实体
      * @return
      */
@@ -16,6 +17,7 @@ public interface TeamChatMapper {
 
     /**
      * 根据团队码获取消息
+     *
      * @param teamCode 团队码
      * @return
      */

@@ -9,6 +9,7 @@ import java.util.List;
 public interface ChatMapper {
     /**
      * 添加聊天实体
+     *
      * @param chatEntity 聊天实体对象
      * @return
      */
@@ -16,9 +17,10 @@ public interface ChatMapper {
 
     /**
      * 获取聊天内容
+     *
      * @param from 发送人
      * @param to   接收人
      * @return
      */
-    List<ChatEntity> getChats(int from,int to);
+    List<ChatEntity> getChats(int from, int to);
 }

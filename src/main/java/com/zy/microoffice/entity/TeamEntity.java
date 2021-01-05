@@ -3,7 +3,7 @@ package com.zy.microoffice.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "团队信息",description = "团队实体信息")
+@ApiModel(value = "团队信息", description = "团队实体信息")
 public class TeamEntity {
     @ApiModelProperty(value = "团队id")
     private int id;

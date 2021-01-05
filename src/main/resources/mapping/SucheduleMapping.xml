@@ -7,10 +7,14 @@
     </resultMap>
 
     <insert id="addSuchedule">
-        insert into b_schedule(title,starttime,endtime,color,remindtime,description,meetingroomid,address,repeatmode,creator,ctime) values(#{title},#{starttime},#{endtime},#{color},#{remindtime},#{description},#{meetingroomid},#{address},#{repeatmode},#{creator},SYSDATE());
+        insert into
+        b_schedule(title,starttime,endtime,color,remindtime,description,meetingroomid,address,repeatmode,creator,ctime)
+        values(#{title},#{starttime},#{endtime},#{color},#{remindtime},#{description},#{meetingroomid},#{address},#{repeatmode},#{creator},SYSDATE());
     </insert>
     <update id="modifySuchedule">
-        update b_schedule set title=#{title},starttime=#{starttime},endtime=#{endtime},color=#{color},remindtime=#{remindtime},description=#{description},meetingroomid=#{meetingroomid},address=#{address},repeatmode=#{repeatmode},creator=#{creator} where id=#{id};
+        update b_schedule set
+        title=#{title},starttime=#{starttime},endtime=#{endtime},color=#{color},remindtime=#{remindtime},description=#{description},meetingroomid=#{meetingroomid},address=#{address},repeatmode=#{repeatmode},creator=#{creator}
+        where id=#{id};
     </update>
     <delete id="removeSuchedule">
         delete from b_schedule where id=#{id}
@@ -19,7 +23,8 @@
         select * from b_schedule where id=#{id}
     </select>
     <select id="getSchedules" resultType="com.zy.microoffice.entity.ScheduleEntity">
-        select * from b_schedule where id in (select scheduleidid from b_participant where userid=#{userid}) union select * from b_schedule where creator=#{userid}
+        select * from b_schedule where id in (select scheduleidid from b_participant where userid=#{userid}) union
+        select * from b_schedule where creator=#{userid}
     </select>
 
     <insert id="addParticipant">

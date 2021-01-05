@@ -11,7 +11,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        LoginHandlerInterceptor loginHandlerInterceptor=new LoginHandlerInterceptor();
+        LoginHandlerInterceptor loginHandlerInterceptor = new LoginHandlerInterceptor();
         InterceptorRegistration loginRegistry = registry.addInterceptor(loginHandlerInterceptor);
         // 拦截路径
         loginRegistry.addPathPatterns("/**/**");
@@ -19,7 +19,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
         loginRegistry.excludePathPatterns("/");
         loginRegistry.excludePathPatterns("/login");
         loginRegistry.excludePathPatterns("/loginout");
-        loginRegistry.excludePathPatterns("/**/*.css","/**/*.js","/**/*.png","/**/*.jpg","/**/*.jpeg");
+        loginRegistry.excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
     }
 
     @Override
