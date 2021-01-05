@@ -1,3 +1,46 @@
+#server:
+#  profiles:
+#    active: dev
+#
 server:
-  profiles:
-    active: dev
+  port: 8088
+
+spring:
+  datasource:
+    username: root
+    password: Zh@ngyue198662
+    url: jdbc:mysql://rm-8vb0fgh87w9z5q61yko.mysql.zhangbei.rds.aliyuncs.com:3306/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  messages:
+    basename: static/i18n/messages
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/views/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    servlet:
+      content-type:
+        text/html
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resources,classpath:views
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapping.xml
+  type-aliases-package: com.zy.microoffice.entity
+  configuration:
+    classpath: mybatis.xml
+
+swagger:
+  markdowns: classpath:markdown/*
+
+#showSql
+logging:
+  level:
+    com.zy.microoffice.service: trace
+
+

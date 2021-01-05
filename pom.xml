@@ -14,6 +14,8 @@
     <name>microoffice</name>
     <description>MicroOffice project for Spring Boot</description>
 
+    <packaging>war</packaging>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -107,10 +109,19 @@
             <artifactId>bootstrap</artifactId>
             <version>4.4.1-1</version>
         </dependency>
+
+        <!--war包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>microoffice</finalName>
         <resources>
+
             <!--			<resource>-->
             <!--				<directory>src/main/java</directory>-->
             <!--				<includes>-->
