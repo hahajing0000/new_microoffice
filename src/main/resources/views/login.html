@@ -67,6 +67,20 @@
                                 <input class="au-input au-input--full" type="password" name="pwd"
                                        th:Placeholder="#{login.pwd}" placeholder="Password">
                             </div>
+                            <div class="form-group">
+                                <label th:text="#{login.classname}">Class Name</label>
+                                <input class="au-input au-input--full" type="text" name="admin_classname" id="admin_classname"
+                                       th:Placeholder="#{login.classname}" placeholder="Class Name">
+                                <select id="classname" class="au-input--full" name="classname">
+                                    <option value="-1">请选择班级</option>
+                                    <option value="0">管理员</option>
+                                    <option value="1705">1705班级</option>
+                                    <option value="1711">1711班级</option>
+                                    <option value="1804">1804班级</option>
+                                    <option value="1808">1808班级</option>
+                                    <option value="1901">1901班级</option>
+                                </select>
+                            </div>
                             <div class="login-checkbox">
                                 <label>
                                     <input type="checkbox" name="remember">[[#{login.rememberme}]]
@@ -104,6 +118,15 @@
 
 <!-- Jquery JS-->
 <script th:src="@{/vendor/jquery-3.2.1.min.js}"></script>
+<script language="JavaScript">
+    $("#admin_classname").hide()
+    $("#classname").on("change",function () {
+        if ($("#classname").val()==0){
+            $("#admin_classname").show()
+            $("#classname").hide()
+        }
+    })
+</script>
 <!-- Bootstrap JS-->
 <script th:src="@{/vendor/bootstrap-4.1/popper.min.js}"></script>
 <script th:src="@{/vendor/bootstrap-4.1/bootstrap.min.js}"></script>
@@ -124,7 +147,9 @@
 </script>
 
 <!-- Main JS-->
-<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/main.js}">
+
+</script>
 
 </body>
 

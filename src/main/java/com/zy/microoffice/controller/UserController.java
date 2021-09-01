@@ -48,8 +48,8 @@ public class UserController {
             @ApiImplicitParam(dataType = "String", name = "pwd", value = "密码", required = true)
     })
     @PostMapping("/login")
-    public ResponseEntity<UserEntity> login(String phoneNumber, String pwd) {
-        UserEntity userEntity = userService.login(phoneNumber, pwd);
+    public ResponseEntity<UserEntity> login(String phoneNumber, String pwd,String classname) {
+        UserEntity userEntity = userService.login(phoneNumber, pwd,classname,false);
         if (userEntity == null) {
             return ResponseUtils.failed("用户名或者密码不正确");
         }

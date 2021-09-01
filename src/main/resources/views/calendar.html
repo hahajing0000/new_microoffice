@@ -76,7 +76,7 @@
     <!-- full calendar requires moment along jquery which is included above -->
     <script th:src="@{/vendor/fullcalendar-3.10.0/lib/moment.min.js}"></script>
     <script th:src="@{/vendor/fullcalendar-3.10.0/fullcalendar.js}"></script>
-
+    <script th:src="@{/vendor/fullcalendar-3.10.0/locale/zh-cn.js}"></script>
     <!-- Main JS-->
     <script th:src="@{/js/main.js}"></script>
 
@@ -87,13 +87,12 @@
 
             // setup a few events
             $('#mCalendar').fullCalendar({
-                themeSystem: 'bootstrap3',
                 header: {
                     left: 'prev,next today myCustomButton',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                locale: initialLocaleCode,
+                locale: 'zh-cn',
                 //displayEventTime: false,
                 displayEventEnd: true,
                 eventLimit: 3,
@@ -101,7 +100,7 @@
                 editable: true,
                 events: {
                     url: '/calendar/loadData',
-                    color: 'orange',   // an option!
+                    color: 'green',   // an option!
                     textColor: 'white'
                 },
                 eventClick: function (calEvent, jsEvent, view) {

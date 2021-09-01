@@ -63,8 +63,8 @@ public class UserService {
      * @param pwd         密码
      * @return
      */
-    public UserEntity login(String phoneNumber, String pwd) {
-        return userMapper.login(phoneNumber, pwd);
+    public UserEntity login(String phoneNumber, String pwd,String classname,boolean isAdmin) {
+        return userMapper.login(phoneNumber, pwd,classname,isAdmin);
     }
 
     /**

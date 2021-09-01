@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.TextUtils;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
@@ -28,16 +30,18 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("phonenumber") String phonenumber, @RequestParam("pwd") String pwd, HttpSession httpSession, Model model) {
-
-        UserEntity login = userService.login(phonenumber, pwd);
+    public String login(@RequestParam("phonenumber") String phonenumber, @RequestParam("pwd") String pwd,@RequestParam("classname") String classname,@RequestParam("admin_classname") String admin_classname, HttpSession httpSession, Model model) {
+        classname= StringUtils.isEmpty(admin_classname)?classname:admin_classname;
+        boolean isAdmin=!StringUtils.isEmpty(admin_classname);
+        UserEntity login = userService.login(phonenumber, pwd,classname,isAdmin);
         if (login != null) {
             //用户登录后将PhoneBumber存入到Session中
             httpSession.setAttribute(ConstValue.USER_PHONENUMBER_KEY, phonenumber);
+            httpSession.setAttribute(ConstValue.USER_CLASSNAME,classname);
             return "redirect:index/index";
         } else {
             httpSession.invalidate();
-            model.addAttribute("error", "用户名或者密码不存在");
+            model.addAttribute("error", "用户名不存在,或者密码输入错误，或者所在班级有误");
         }
         return "login";
     }

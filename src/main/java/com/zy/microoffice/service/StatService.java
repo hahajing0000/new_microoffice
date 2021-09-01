@@ -83,8 +83,8 @@ public class StatService {
      * @param endtime
      * @return
      */
-    public List<StatEntity> getStats(String phonenumber, String starttime, String endtime, int page) {
-        return statMapper.getStats(phonenumber, starttime, endtime, page);
+    public List<StatEntity> getStats(String classname,String phonenumber, String starttime, String endtime, int page) {
+        return statMapper.getStats(classname,phonenumber, starttime, endtime, page);
     }
 
     /**
@@ -93,8 +93,8 @@ public class StatService {
      * @param phonenumber
      * @return
      */
-    public int getDataCount(String phonenumber) {
-        return statMapper.getDataCount(phonenumber);
+    public int getDataCount(String phonenumber,String classname) {
+        return statMapper.getDataCount(phonenumber,classname);
     }
 
     /**
@@ -102,8 +102,8 @@ public class StatService {
      *
      * @return
      */
-    public int getOfferCount() {
-        return statMapper.getOfferCount();
+    public int getOfferCount(String classname) {
+        return statMapper.getOfferCount(classname);
     }
 
     /**
@@ -111,8 +111,8 @@ public class StatService {
      *
      * @return
      */
-    public int getInterViewCountToday() {
-        return statMapper.getInterViewCountToday();
+    public int getInterViewCountToday(String classname) {
+        return statMapper.getInterViewCountToday(classname);
     }
 
     /**
@@ -120,8 +120,8 @@ public class StatService {
      *
      * @return
      */
-    public double getInterViewSuccess() {
-        return statMapper.getInterViewSuccess();
+    public double getInterViewSuccess(String classname) {
+        return statMapper.getInterViewSuccess(classname);
     }
 
     /**
@@ -129,8 +129,8 @@ public class StatService {
      *
      * @return
      */
-    public List<StatEntity> getStatEntityBySuccess() {
-        return statMapper.getStatEntityBySuccess();
+    public List<StatEntity> getStatEntityBySuccess(String classname) {
+        return statMapper.getStatEntityBySuccess(classname);
     }
 
     /**
@@ -138,8 +138,8 @@ public class StatService {
      *
      * @return
      */
-    public HashMap<String, Integer> getSuceessRate() {
-        return statMapper.getSuceessRate();
+    public HashMap<String, Integer> getSuceessRate(String classname) {
+        return statMapper.getSuceessRate(classname);
     }
 
     /**
@@ -147,8 +147,8 @@ public class StatService {
      *
      * @return
      */
-    public List<CalendarEntity> getCalendarData(String phonenumber) {
-        return statMapper.getCalendarData(phonenumber);
+    public List<CalendarEntity> getCalendarData(String phonenumber,String classname) {
+        return statMapper.getCalendarData(phonenumber,classname);
     }
 
     /**
@@ -156,8 +156,8 @@ public class StatService {
      *
      * @return
      */
-    public List<InterViewCountEntity> getUserInterViewCount() {
-        return statMapper.getUserInterViewCount();
+    public List<InterViewCountEntity> getUserInterViewCount(String classname) {
+        return statMapper.getUserInterViewCount(classname);
     }
 
     /**
@@ -165,7 +165,7 @@ public class StatService {
      *
      * @return
      */
-    public List<StatEntity> getStatEntityToady() {
-        return statMapper.getStatEntityToady();
+    public List<StatEntity> getStatEntityToady(String classname) {
+        return statMapper.getStatEntityToady(classname);
     }
 }

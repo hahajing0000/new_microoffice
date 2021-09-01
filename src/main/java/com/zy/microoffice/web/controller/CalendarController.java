@@ -34,10 +34,11 @@ public class CalendarController {
     @ResponseBody
     public List<CalendarEntity> loadData(HttpSession httpSession) {
         String phonenumber = "";//(String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
+        String classname= (String) httpSession.getAttribute(ConstValue.USER_CLASSNAME);
         if (phonenumber.toLowerCase().trim().equals("admin")) {
             phonenumber = "";
         }
-        List<CalendarEntity> calendarData = statService.getCalendarData(phonenumber);
+        List<CalendarEntity> calendarData = statService.getCalendarData(phonenumber,classname);
         return calendarData;
     }
 

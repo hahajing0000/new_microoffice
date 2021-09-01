@@ -59,13 +59,13 @@ public interface StatMapper {
     StatEntity getStatById(int id);
 
     /**
-     * 根据添加获取面试信息
+     * 根据条件获取面试信息
      *
      * @param starttime
      * @param endtime
      * @return
      */
-    List<StatEntity> getStats(String phonenumber, String starttime, String endtime, int currentpage);
+    List<StatEntity> getStats(String classname,String phonenumber, String starttime, String endtime, int currentpage);
 
     /**
      * 根据手机号码获取数据页数
@@ -73,61 +73,61 @@ public interface StatMapper {
      * @param phonenumber
      * @return
      */
-    int getDataCount(String phonenumber);
+    int getDataCount(String phonenumber,String classname);
 
     /**
      * 获取有Offer的人数
      *
      * @return
      */
-    int getOfferCount();
+    int getOfferCount(String classname);
 
     /**
      * 获取今天面试人数
      *
      * @return
      */
-    int getInterViewCountToday();
+    int getInterViewCountToday(String classname);
 
     /**
      * 获取面试成功率
      *
      * @return
      */
-    int getInterViewSuccess();
+    int getInterViewSuccess(String classname);
 
     /**
      * 获取已经下Offer的面试信息
      *
      * @return
      */
-    List<StatEntity> getStatEntityBySuccess();
+    List<StatEntity> getStatEntityBySuccess(String classname);
 
     /**
      * 获取面试成功统计数据
      *
      * @return
      */
-    HashMap<String, Integer> getSuceessRate();
+    HashMap<String, Integer> getSuceessRate(String classname);
 
     /**
      * 获取日历相关数据
      *
      * @return
      */
-    List<CalendarEntity> getCalendarData(String phonenumber);
+    List<CalendarEntity> getCalendarData(String phonenumber,String classname);
 
     /**
      * 获取用户预约面试数量
      *
      * @return
      */
-    List<InterViewCountEntity> getUserInterViewCount();
+    List<InterViewCountEntity> getUserInterViewCount(String classname);
 
     /**
      * 获取今日面试信息
      *
      * @return
      */
-    List<StatEntity> getStatEntityToady();
+    List<StatEntity> getStatEntityToady(String classname);
 }

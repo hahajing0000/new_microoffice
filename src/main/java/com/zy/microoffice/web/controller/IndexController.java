@@ -1,5 +1,6 @@
 package com.zy.microoffice.web.controller;
 
+import com.zy.microoffice.config.ConstValue;
 import com.zy.microoffice.entity.InterViewCountEntity;
 import com.zy.microoffice.entity.StatEntity;
 import com.zy.microoffice.service.StatService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpSession;
+import java.sql.Connection;
 import java.util.*;
 
 @ApiIgnore
@@ -32,21 +35,22 @@ public class IndexController {
     }
 
     @RequestMapping("/index")
-    public String gotoIndex(Model model) {
+    public String gotoIndex(HttpSession httpSession, Model model) {
+        String classname = (String) httpSession.getAttribute(ConstValue.USER_CLASSNAME);
         //有Offer人数
-        int offerCount = statService.getOfferCount();
+        int offerCount = statService.getOfferCount(classname);
         //今日面试人数
-        int interViewCountToday = statService.getInterViewCountToday();
+        int interViewCountToday = statService.getInterViewCountToday(classname);
         //面试成功率
-        double interViewSuccess = statService.getInterViewSuccess();
-        HashMap<String, Integer> suceessRate = statService.getSuceessRate();
+        double interViewSuccess = statService.getInterViewSuccess(classname);
+        HashMap<String, Integer> suceessRate = statService.getSuceessRate(classname);
         //有Offer人员信息
-        List<StatEntity> statEntityBySuccess = statService.getStatEntityBySuccess();
+        List<StatEntity> statEntityBySuccess = statService.getStatEntityBySuccess(classname);
         if (statEntityBySuccess == null) {
             statEntityBySuccess = new ArrayList<>();
         }
         //今日面试人员信息
-        List<StatEntity> statEntityToady = statService.getStatEntityToady();
+        List<StatEntity> statEntityToady = statService.getStatEntityToady(classname);
         if (statEntityToady == null) {
             statEntityToady = new ArrayList<>();
         }
@@ -71,8 +75,9 @@ public class IndexController {
 
     @RequestMapping(value = "/getInterViewCount")
     @ResponseBody
-    public List<InterViewCountEntity> getInterViewCount() {
-        List<InterViewCountEntity> userInterViewCount = statService.getUserInterViewCount();
+    public List<InterViewCountEntity> getInterViewCount(HttpSession httpSession) {
+        String classname=(String) httpSession.getAttribute(ConstValue.USER_CLASSNAME);
+        List<InterViewCountEntity> userInterViewCount = statService.getUserInterViewCount(classname);
         return userInterViewCount;
     }
 

@@ -28,6 +28,9 @@
     </select>
     <select id="login" resultMap="BaseResultMap">
         select id,phonenumber,pwd,realname,headimg,ctime from s_user where phonenumber=#{phoneNumber} and pwd=#{pwd}
+        <if test="isAdmin=false">
+            and classname=#{classname}
+        </if>
     </select>
     <update id="modifyRealName">
         update s_user set realname=#{realName} where id=#{id}

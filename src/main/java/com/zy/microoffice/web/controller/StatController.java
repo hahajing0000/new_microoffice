@@ -23,8 +23,9 @@ public class StatController {
     StatService statService;
 
     @RequestMapping("/")
-    public String init(Model model) {
-        List<StatEntity> stats = statService.getStats("", "", "", -1);
+    public String init(Model model,HttpSession httpSession) {
+        String classname=(String) httpSession.getAttribute(ConstValue.USER_CLASSNAME);
+        List<StatEntity> stats = statService.getStats(classname,"", "", "", -1);
         model.addAttribute("list", stats);
         return "stat";
     }
@@ -33,13 +34,14 @@ public class StatController {
     public String FindStat(Model model, String starttime, String endtime, int page, HttpSession httpSession) {
 //        if (starttime==null){starttime="";}
 //        if(endtime==null){endtime="";}
+        String classname=(String)httpSession.getAttribute(ConstValue.USER_CLASSNAME);
         String phonenumber = (String) httpSession.getAttribute(ConstValue.USER_PHONENUMBER_KEY);
         if (phonenumber.toLowerCase().trim().equals("admin")) {
             phonenumber = "";
         }
-        List<StatEntity> stats = statService.getStats(phonenumber, starttime, endtime, page);
+        List<StatEntity> stats = statService.getStats(classname,phonenumber, starttime, endtime, page);
         model.addAttribute("list", stats);
-        int dataCount = statService.getDataCount(phonenumber);
+        int dataCount = statService.getDataCount(phonenumber,classname);
         model.addAttribute("datacount", dataCount);
         return "stat";
     }

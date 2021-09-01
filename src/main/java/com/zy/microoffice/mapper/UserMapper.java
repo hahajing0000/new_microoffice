@@ -15,7 +15,7 @@ public interface UserMapper {
     UserEntity getUserById(int id);
 
     //用户登录
-    UserEntity login(String phoneNumber, String pwd);
+    UserEntity login(String phoneNumber, String pwd,String classname,boolean isAdmin);
 
     //修改用户真实姓名
     boolean modifyRealName(String realName, int id);
