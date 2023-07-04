@@ -4,8 +4,9 @@ server:
 spring:
   datasource:
     username: root
-    password: Zh@ngyue198662
-    url: jdbc:mysql://rm-8vb0fgh87w9z5q61yko.mysql.zhangbei.rds.aliyuncs.com:3306/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&allowMultiQueries=true
+    password: 123456 #Zh@ngyue198662
+#    url: jdbc:mysql://rm-8vb0fgh87w9z5q61yko.mysql.zhangbei.rds.aliyuncs.com:3306/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://10.161.9.80:3307/microoffice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC&allowMultiQueries=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   messages:
     basename: static/i18n/messages

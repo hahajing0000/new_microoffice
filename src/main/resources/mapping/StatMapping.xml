@@ -68,7 +68,8 @@
         select count(DISTINCT s.phonenumber) from b_stat s,s_user u where s.phonenumber=u.phonenumber and u.classname=#{classname} and TO_DAYS(s.interviewtime) = TO_DAYS(now()) and s.isvalid>0
     </select>
     <select id="getInterViewSuccess" resultType="int">
-        select FORMAT((select count(*) from b_stat s,s_user u where s.phonenumber=u.phonenumber and u.classname=#{classname} and s.isvalid>0 and s.interviewresult=1)/(select count(*) from b_stat s,s_user u where s.phonenumber=u.phonenumber and u.classname=#{classname}),2)*100 AS R
+
+        SELECT IFNULL(R,0) AS R FROM (SELECT FORMAT((select count(*) from b_stat s,s_user u where s.phonenumber=u.phonenumber and u.classname=#{classname} and s.isvalid>0 and s.interviewresult=1)/(select count(*) from b_stat s,s_user u where s.phonenumber=u.phonenumber and u.classname=#{classname}),2)*100 AS R From DUAL) AS TT;
     </select>
     <select id="getStatEntityBySuccess" resultType="com.zy.microoffice.entity.StatEntity">
         select s.*,u.realname from b_stat s,s_user u where s.phonenumber=u.phonenumber and s.interviewresult=1 and
